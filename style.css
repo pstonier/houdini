@@ -1,26 +1,16 @@
+@charset "UTF-8";
 /*
-Theme Name: houdini
-Theme URI: http://underscores.me/
+Theme Name: Houdini
+Theme URI: http://paulstonier.com/
 Author: Paul Stonier
 Author URI: http://paulstonier.com/
-Description: Starter Theme
+Description: Hi. I'm a starter theme called <code>Salient 2015</code>, or <em>underscores</em>, if you like. I'm a theme meant for hacking so don't use me as a <em>Parent Theme</em>. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
 Version: 1.0-wpcom
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: houdini
-Tags:
-
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-
- houdini is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
-
-Resetting and rebuilding styles have been helped along thanks to the fine work of
-Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-and Blueprint http://www.blueprintcss.org/
+Tags:starter theme with semantic grid
 */
-
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -44,114 +34,538 @@ and Blueprint http://www.blueprintcss.org/
 	12.1 Captions
 	12.2 Galleries
 --------------------------------------------------------------*/
+/**
+ * Returns a media context (media query / grid context) that can be stored in a variable and passed to `media()` as a single-keyword argument. Media contexts defined using `new-breakpoint` are used by the visual grid, as long as they are defined before importing Neat.
+ *
+ * @param {List} $query
+ *   - A list of media query features and values. Each `$feature` should have a corresponding `$value`. If there is only a single `$value` in `$query`, `$default-feature` is going to be used. The number of total columns in the grid can be set by passing `$columns` at the end of the list (overrides `$total-columns`). For a list of valid values for `$feature`, click [here](http://www.w3.org/TR/css3-mediaqueries/#media1).
+ *
+ * @param {Number (unitless)} $total-columns ($grid-columns)
+ *   - Number of columns to use in the new grid context. Can be set as a shorthand in the first parameter.
+ *
+ * @example scss - Usage
+ *   $mobile: new-breakpoint(max-width 480px 4);
+ *
+ *   .element {
+ *     @include media($mobile) {
+ *       @include span-columns(4);
+ *     }
+ *   }
+ *
+ * @example css - CSS Output
+ *   @media screen and (max-width: 480px) {
+ *     .element {
+ *       display: block;
+ *       float: left;
+ *       margin-right: 7.42297%;
+ *       width: 100%;
+ *     }
+ *     .element:last-child {
+ *       margin-right: 0;
+ *     }
+ *   }
+ */
+/**
+ * Sets the relative width of a single grid column. The unit used should be the same one used to define `$gutter`. To learn more about golden-ratio() see [Bourbon docs](http://bourbon.io/docs/#golden-ratio). Set with a `!global` flag.
+ *
+ * @type Number (Unit)
+ */
+/**
+ * Sets the relative width of a single grid gutter. The unit used should be the same one used to define `$column`. To learn more about golden-ratio() see [Bourbon docs](http://bourbon.io/docs/#golden-ratio). Set with the `!global` flag.
+ *
+ * @type Number (Unit)
+ */
+/**
+ * Sets the total number of columns in the grid. Its value can be overridden inside a media query using the `media()` mixin. Set with the `!global` flag.
+ *
+ * @type Number (Unitless)
+ */
+/**
+ * Sets the max-width property of the element that includes `outer-container()`. To learn more about `em()` see [Bourbon docs](http://bourbon.io/docs/#px-to-em). Set with the `!global` flag.
+ *
+ * @type Number (Unit)
+ */
+/**
+ * When set to true, it sets the box-sizing property of all elements to `border-box`. Set with a `!global` flag.
+ *
+ * @type Bool
+ *
+ * @example css - CSS Output
+ *   * {
+ *     -webkit-box-sizing: border-box;
+ *     -moz-box-sizing: border-box;
+ *     box-sizing: border-box;
+ *   }
+ */
+/**
+ * Sets the default [media feature](http://www.w3.org/TR/css3-mediaqueries/#media) that `media()` and `new-breakpoint()` revert to when only a breakpoint value is passed. Set with a `!global` flag.
+ *
+ * @type String
+ */
+/**
+ * Sets the default layout direction of the grid. Can be `LTR` or `RTL`. Set with a `!global` flag.
+ *
+ * @type String
+ */
+/**
+ * Displays the visual grid when set to true. The overlaid grid may be few pixels off depending on the browser's rendering engine and pixel rounding algorithm. Set with the `!global` flag.
+ *
+ * @type Bool
+ */
+/**
+ * Sets the visual grid color. Set with `!global` flag.
+ *
+ * @type Color
+ */
+/**
+ * Sets the `z-index` property of the visual grid. Can be `back` (behind content) or `front` (in front of content). Set with `!global` flag.
+ *
+ * @type String
+ */
+/**
+ * Sets the opacity property of the visual grid. Set with `!global` flag.
+ *
+ * @type Number (unitless)
+ */
+/**
+ * Disable all deprecation warnings. Defaults to `false`. Set with a `!global` flag.
+ *
+ * @type Bool
+ */
+/* Neat 1.7.0.pre
+ * http://neat.bourbon.io
+ * Copyright 2012-2014 thoughtbot, inc.
+ * MIT License */
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
 
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
+
+/**
+ * Removes the element's gutter margin, regardless of its position in the grid hierarchy or display property. It can target a specific element, or every `nth-child` occurrence. Works only with `block` layouts.
+ *
+ * @param {List} $query (block)
+ *   List of arguments. Supported arguments are `nth-child` selectors (targets a specific pseudo element) and `auto` (targets `last-child`).
+ *
+ *   When passed an `nth-child` argument of type `*n` with `block` display, the omega mixin automatically adds a clear to the `*n+1` th element. Note that composite arguments such as `2n+1` do not support this feature.
+ *
+ *   **Deprecation warning**: The omega mixin will no longer take a `$direction` argument. To change the layout direction, use `row($direction)` or set `$default-layout-direction` instead.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include omega;
+ *   }
+ *
+ *   .nth-element {
+ *     @include omega(4n);
+ *   }
+ *
+ * @example css - CSS Output
+ *   .element {
+ *     margin-right: 0;
+ *   }
+ *
+ *   .nth-element:nth-child(4n) {
+ *     margin-right: 0;
+ *   }
+ *
+ *   .nth-element:nth-child(4n+1) {
+ *     clear: left;
+ *   }
+ */
+/**
+ * Makes an element a outer container by centring it in the viewport, clearing its floats, and setting its `max-width`.
+ * Although optional, using `outer-container` is recommended. The mixin can be called on more than one element per page, as long as they are not nested.
+ *
+ * @param {Number (unit)} $local-max-width ($max-width)
+ *   Max width to be applied to the element. Can be a percentage or a measure.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include outer-container(100%);
+ *   }
+ *
+ * @example css - CSS Output
+ *   .element {
+ *     *zoom: 1;
+ *     max-width: 100%;
+ *     margin-left: auto;
+ *     margin-right: auto;
+ *   }
+ *
+ *   .element:before, .element:after {
+ *     content: " ";
+ *     display: table;
+ *   }
+ *
+ *   .element:after {
+ *     clear: both;
+ *   }
+ */
+/**
+ * Specifies the number of columns an element should span. If the selector is nested the number of columns of its parent element should be passed as an argument as well.
+ *
+ * @param {List} $span
+ *   A list containing `$columns`, the unitless number of columns the element spans (required), and `$container-columns`, the number of columns the parent element spans (optional).
+ *
+ *   If only one value is passed, it is assumed that it's `$columns` and that that `$container-columns` is equal to `$grid-columns`, the total number of columns in the grid.
+ *
+ *   The values can be separated with any string such as `of`, `/`, etc.
+ *
+ * @param {String} $display (block)
+ *   Sets the display property of the element. By default it sets the display propert of the element to `block`.
+ *
+ *   If passed `block-collapse`, it also removes the margin gutter by adding it to the element width.
+ *
+ *   If passed `table`, it sets the display property to `table-cell` and calculates the width of the element without taking gutters into consideration. The result does not align with the block-based grid.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include span-columns(6);
+
+ *    .nested-element {
+ *      @include span-columns(2 of 6);
+ *    }
+ *  }
+ *
+ * @example css - CSS Output
+ *   .element {
+ *     display: block;
+ *     float: left;
+ *     margin-right: 2.35765%;
+ *     width: 48.82117%;
+ *   }
+ *
+ *   .element:last-child {
+ *     margin-right: 0;
+ *   }
+ *
+ *   .element .nested-element {
+ *     display: block;
+ *     float: left;
+ *     margin-right: 4.82916%;
+ *     width: 30.11389%;
+ *   }
+ *
+ *   .element .nested-element:last-child {
+ *     margin-right: 0;
+ *   }
+ */
+/**
+ * Designates the element as a row of columns in the grid layout. It clears the floats on the element and sets its display property. Rows can't be nested, but there can be more than one row element—with different display properties—per layout.
+ *
+ * @param {String} $display (default)
+ *   Sets the display property of the element and the display context that will be used by its children. Can be `block` or `table`.
+ *
+ * @param {String} $direction ($default-layout-direction)
+ *   Sets the layout direction. Can be `LTR` (left-to-right) or `RTL` (right-to-left).
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include row();
+ *   }
+ *
+ * @example css - CSS Output
+ *   .element {
+ *     *zoom: 1;
+ *     display: block;
+ *   }
+ *
+ *  .element:before, .element:after {
+ *    content: " ";
+ *    display: table;
+ *  }
+ *
+ *  .element:after {
+ *    clear: both;
+ *  }
+ */
+/**
+ * Translates an element horizontally by a number of columns. Positive arguments shift the element to the active layout direction, while negative ones shift it to the opposite direction.
+ *
+ * @param {Number (unitless)} $n-columns (1)
+ *   Number of columns by which the element shifts.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include shift(-3);
+ *   }
+ *
+ * @example css - CSS output
+ *   .element {
+ *     margin-left: -25.58941%;
+ *   }
+ */
+/**
+ * Translates an element horizontally by a number of columns, in a specific nesting context.
+ *
+ * @param {List} $shift
+ *   A list containing the number of columns to shift (`$columns`) and the number of columns of the parent element (`$container-columns`).
+ *
+ *   The two values can be separated with any string such as `of`, `/`, etc.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include shift(-3 of 6);
+ *   }
+ *
+ * @example css - CSS output
+ *   .element {
+ *     margin-left: -52.41458%;
+ *   }
+ */
+/**
+ * Adds padding to the element.
+ *
+ * @param {List} $padding (flex-gutter())
+ *   A list of padding value(s) to use. Passing `default` in the list will result in using the gutter width as a padding value.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include pad(30px -20px 10px default);
+ *   }
+ *
+ * @example css - CSS Output
+ *   .element {
+ *     padding: 30px -20px 10px 2.35765%;
+ *   }
+ */
+/**
+ * Forces the element to fill its parent container.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include fill-parent;
+ *   }
+ *
+ * @example css - CSS Output
+ *   .element {
+ *     width: 100%;
+ *     -webkit-box-sizing: border-box;
+ *     -moz-box-sizing: border-box;
+ *     box-sizing: border-box;
+ *   }
+ */
+/**
+ * Outputs a media-query block with an optional grid context (the total number of columns used in the grid).
+ *
+ * @param {List} $query
+ *   A list of media query features and values, where each `$feature` should have a corresponding `$value`.
+ *   For a list of valid values for `$feature`, click [here](http://www.w3.org/TR/css3-mediaqueries/#media1).
+ *
+ *   If there is only a single `$value` in `$query`, `$default-feature` is going to be used.
+ *
+ *   The number of total columns in the grid can be set by passing `$columns` at the end of the list (overrides `$total-columns`).
+ *
+ *
+ * @param {Number (unitless)} $total-columns ($grid-columns)
+ *   - Number of columns to use in the new grid context. Can be set as a shorthand in the first parameter.
+ *
+ * @example scss - Usage
+ *   .responsive-element {
+ *      @include media(769px) {
+ *        @include span-columns(6);
+ *      }
+ *   }
+ *
+ *  .new-context-element {
+ *    @include media(min-width 320px max-width 480px, 6) {
+ *      @include span-columns(6);
+ *    }
+ *  }
+ *
+ * @example css - CSS Output
+ *  @media screen and (min-width: 769px) {
+ *    .responsive-element {
+ *      display: block;
+ *      float: left;
+ *      margin-right: 2.35765%;
+ *      width: 48.82117%;
+ *    }
+ *
+ *    .responsive-element:last-child {
+ *      margin-right: 0;
+ *    }
+ *  }
+ *
+ *  @media screen and (min-width: 320px) and (max-width: 480px) {
+ *    .new-context-element {
+ *      display: block;
+ *      float: left;
+ *      margin-right: 4.82916%;
+ *      width: 100%;
+ *    }
+ *
+ *    .new-context-element:last-child {
+ *      margin-right: 0;
+ *    }
+ *  }
+ */
+/**
+ * Resets the active display property to `block`. Particularly useful when changing the display property in a single row.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include row(table);
+ *     // Context changed to table display
+ *   }
+ *
+ *   @include reset-display;
+ *   // Context is reset to block display
+ */
+/**
+ * Resets the active layout direction to the default value set in `$default-layout-direction`. Particularly useful when changing the layout direction in a single row.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include row($direction: RTL);
+ *     // Context changed to right-to-left
+ *   }
+ *
+ *   @include reset-layout-direction;
+ *   // Context is reset to left-to-right
+ */
+/**
+ * Resets both the active layout direction and the active display property.
+ *
+ * @example scss - Usage
+ *   .element {
+ *     @include row(table, RTL);
+ *     // Context changed to table table and right-to-left
+ *   }
+ *
+ *   @include reset-all;
+ *   // Context is reset to block display and left-to-right
+ */
+/**
+ * Changes the display property used by other mixins called in the code block argument.
+ *
+ * @param {String} $display (block)
+ *   Display value to be used within the block. Can be `table` or `block`.
+ *
+ * @example scss
+ *   @include display(table) {
+ *    .display-table {
+ *      @include span-columns(6);
+ *     }
+ *   }
+ *
+ * @example css
+ *   .display-table {
+ *      display: table-cell;
+ *      ...
+ *   }
+ */
+/**
+ * Changes the direction property used by other mixins called in the code block argument.
+ *
+ * @param {String} $direction (left-to-right)
+ *   Layout direction to be used within the block. Can be `left-to-right` or `right-to-left`.
+ *
+ * @example scss - Usage
+ *   @include direction(right-to-left) {
+ *    .right-to-left-block {
+ *      @include span-columns(6);
+ *     }
+ *   }
+ *
+ * @example css - CSS Output
+ *   .right-to-left-block {
+ *     float: right;
+ *      ...
+ *   }
+ */
 /*--------------------------------------------------------------
 1.0 Reset
 --------------------------------------------------------------*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, ins, kbd, q, s, samp,
+del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	border: 0;
-	font-family: inherit;
-	font-size: 100%;
-	font-style: inherit;
-	font-weight: inherit;
-	margin: 0;
-	outline: 0;
-	padding: 0;
-	vertical-align: baseline;
-}
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
 
 html {
-	font-size: 62.5%; /* Corrects text resizing oddly in IE6/7 when body font-size is set using em units http://clagnut.com/blog/348/#c790 */
-	overflow-y: scroll; /* Keeps page centered in all browsers regardless of content height */
-	-webkit-text-size-adjust: 100%; /* Prevents iOS text size adjust after orientation change, without disabling user zoom */
-	-ms-text-size-adjust:     100%; /* www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/ */
-	box-sizing: border-box; /* Apply a natural box layout model to the document; see http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
-}
-*,
-*:before,
-*:after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
-	box-sizing: inherit;
-}
+  line-height: 1; }
 
-body {
-	background: #fff; /* Fallback for when there is no custom background color defined. */
-}
+ol, ul {
+  list-style: none; }
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-main,
-nav,
-section {
-	display: block;
-}
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
 
-ol,
-ul {
-	list-style: none;
-}
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
 
-table { /* tables still need 'cellspacing="0"' in the markup */
-	border-collapse: separate;
-	border-spacing: 0;
-}
-
-caption,
-th,
-td {
-	font-weight: normal;
-	text-align: left;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-	content: "";
-}
-
-blockquote,
-q {
-	quotes: "" "";
-}
-
-a:focus {
-	outline: thin dotted;
-}
-
-a:hover,
-a:active {
-	outline: 0;
-}
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
 
 a img {
-	border: 0;
-}
+  border: none; }
 
-/*--------------------------------------------------------------
-2.0 Typography
---------------------------------------------------------------*/
-body,
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+/* Bitters 0.10.0
+ * http://bitters.bourbon.io
+ * Copyright 2013-2014 thoughtbot, inc.
+ * MIT License */
 button,
-input,
-select,
-textarea {
-	color: #404040;
-	font-family: sans-serif;
-	font-size: 16px;
-	font-size: 1.6rem;
-	line-height: 1.5;
-}
+input[type="submit"] {
+  -webkit-font-smoothing: antialiased;
+  background-color: #477DCA;
+  border-radius: 3px;
+  color: white;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0.75em 1em;
+  text-decoration: none; }
+  button:hover,
+  input[type="submit"]:hover {
+    background-color: #2c5999;
+    color: white; }
+  button:disabled,
+  input[type="submit"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
+
+body {
+  -webkit-font-feature-settings: "kern", "liga", "frac", "pnum";
+  -moz-font-feature-settings: "kern", "liga", "frac", "pnum";
+  -ms-font-feature-settings: "kern", "liga", "frac", "pnum";
+  font-feature-settings: "kern", "liga", "frac", "pnum";
+  -webkit-font-smoothing: antialiased;
+  background-color: white;
+  color: #333;
+  font-family: "freight-text-pro";
+  font-size: 1em;
+  line-height: 1.5; }
 
 h1,
 h2,
@@ -159,246 +573,198 @@ h3,
 h4,
 h5,
 h6 {
-	clear: both;
-}
+  font-family: "freight-text-pro";
+  line-height: 1.25;
+  margin: 0; }
+
+h1 {
+  font-size: 2.25em; }
+
+h2 {
+  font-size: 2em; }
+
+h3 {
+  font-size: 1.75em; }
+
+h4 {
+  font-size: 1.5em; }
+
+h5 {
+  font-size: 1.25em; }
+
+h6 {
+  font-size: 1em; }
 
 p {
-	margin-bottom: 1.5em;
-}
+  margin: 0 0 0.75em; }
 
-b,
-strong {
-	font-weight: bold;
-}
+a {
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  color: #477DCA;
+  text-decoration: none; }
+  a:hover {
+    color: #2c5999; }
+  a:active, a:focus {
+    color: #2c5999;
+    outline: none; }
 
-dfn,
-cite,
-em,
-i {
-	font-style: italic;
-}
+hr {
+  border-bottom: 1px solid #DDD;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: 1.5em 0; }
+
+img,
+picture {
+  margin: 0;
+  max-width: 100%; }
 
 blockquote {
-	margin: 0 1.5em;
-}
+  border-left: 2px solid #DDD;
+  color: #595959;
+  margin: 1.5em 0;
+  padding-left: 0.75em; }
 
-address {
-	margin: 0 0 1.5em;
-}
+cite {
+  color: #737373;
+  font-style: italic; }
+  cite:before {
+    content: "\2014 \00A0"; }
 
-pre {
-	background: #eee;
-	font-family: "Courier 10 Pitch", Courier, monospace;
-	font-size: 15px;
-	font-size: 1.5rem;
-	line-height: 1.6;
-	margin-bottom: 1.6em;
-	max-width: 100%;
-	overflow: auto;
-	padding: 1.6em;
-}
+fieldset {
+  background: #f7f7f7;
+  border: 1px solid #DDD;
+  margin: 0 0 0.75em 0;
+  padding: 1.5em; }
 
-code,
-kbd,
-tt,
-var {
-	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-	font-size: 15px;
-	font-size: 1.5rem;
-}
-
-abbr,
-acronym {
-	border-bottom: 1px dotted #666;
-	cursor: help;
-}
-
-mark,
-ins {
-	background: #fff9c0;
-	text-decoration: none;
-}
-
-sup,
-sub {
-	font-size: 75%;
-	height: 0;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
-}
-
-sup {
-	bottom: 1ex;
-}
-
-sub {
-	top: .5ex;
-}
-
-small {
-	font-size: 75%;
-}
-
-big {
-	font-size: 125%;
-}
-
-/*--------------------------------------------------------------
-3.0 Elements
---------------------------------------------------------------*/
-hr {
-	background-color: #ccc;
-	border: 0;
-	height: 1px;
-	margin-bottom: 1.5em;
-}
-
-ul,
-ol {
-	margin: 0 0 1.5em 3em;
-}
-
-ul {
-	list-style: disc;
-}
-
-ol {
-	list-style: decimal;
-}
-
-li > ul,
-li > ol {
-	margin-bottom: 0;
-	margin-left: 1.5em;
-}
-
-dt {
-	font-weight: bold;
-}
-
-dd {
-	margin: 0 1.5em 1.5em;
-}
-
-img {
-	height: auto; /* Make sure images are scaled correctly. */
-	max-width: 100%; /* Adhere to container width. */
-}
-
-figure {
-	margin: 0;
-}
-
-table {
-	margin: 0 0 1.5em;
-	width: 100%;
-}
-
-th {
-	font-weight: bold;
-}
-
-/*--------------------------------------------------------------
-4.0 Forms
---------------------------------------------------------------*/
-button,
 input,
-select,
+label,
+select {
+  display: block;
+  font-family: "freight-text-pro";
+  font-size: 1em; }
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.375em; }
+  label.required:after {
+    content: "*"; }
+  label abbr {
+    display: none; }
+
+textarea,
+input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"],
+select[multiple=multiple] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: border-color;
+  -moz-transition: border-color;
+  transition: border-color;
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #DDD;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-family: "freight-text-pro";
+  font-size: 1em;
+  margin-bottom: 0.75em;
+  padding: 0.5em 0.5em;
+  width: 100%; }
+  textarea:hover,
+  input[type="email"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="url"]:hover, input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="month"]:hover, input[type="time"]:hover, input[type="week"]:hover,
+  select[multiple=multiple]:hover {
+    border-color: #c4c4c4; }
+  textarea:focus,
+  input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus,
+  select[multiple=multiple]:focus {
+    border-color: #477DCA;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(55, 112, 192, 0.7);
+    outline: none; }
+
 textarea {
-	font-size: 100%; /* Corrects font size not being inherited in all browsers */
-	margin: 0; /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
-	vertical-align: baseline; /* Improves appearance and consistency in all browsers */
-}
+  resize: vertical; }
 
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-	border: 1px solid;
-	border-color: #ccc #ccc #bbb;
-	border-radius: 3px;
-	background: #e6e6e6;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 15px 17px rgba(255, 255, 255, 0.5), inset 0 -5px 12px rgba(0, 0, 0, 0.05);
-	color: rgba(0, 0, 0, .8);
-	cursor: pointer; /* Improves usability and consistency of cursor style between image-type 'input' and others */
-	-webkit-appearance: button; /* Corrects inability to style clickable 'input' types in iOS */
-	font-size: 12px;
-	font-size: 1.2rem;
-	line-height: 1;
-	padding: .6em 1em .4em;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-button:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover,
-input[type="submit"]:hover {
-	border-color: #ccc #bbb #aaa;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 15px 17px rgba(255, 255, 255, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0.02);
-}
-
-button:focus,
-input[type="button"]:focus,
-input[type="reset"]:focus,
-input[type="submit"]:focus,
-button:active,
-input[type="button"]:active,
-input[type="reset"]:active,
-input[type="submit"]:active {
-	border-color: #aaa #bbb #bbb;
-	box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15);
-}
+input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none; }
 
 input[type="checkbox"],
 input[type="radio"] {
-	padding: 0; /* Addresses excess padding in IE8/9 */
-}
+  display: inline;
+  margin-right: 0.375em; }
 
-input[type="search"] {
-	-webkit-appearance: textfield; /* Addresses appearance set to searchfield in S5, Chrome */
-	box-sizing: content-box;
-}
+input[type="file"] {
+  padding-bottom: 0.75em;
+  width: 100%; }
 
-input[type="search"]::-webkit-search-decoration { /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
-	-webkit-appearance: none;
-}
+select {
+  margin-bottom: 1.5em;
+  max-width: 100%;
+  width: auto; }
 
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-input[type="search"],
-textarea {
-	color: #666;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
+table {
+  -webkit-font-feature-settings: "kern", "liga", "tnum";
+  -moz-font-feature-settings: "kern", "liga", "tnum";
+  -ms-font-feature-settings: "kern", "liga", "tnum";
+  font-feature-settings: "kern", "liga", "tnum";
+  border-collapse: collapse;
+  margin: 0.75em 0;
+  table-layout: fixed;
+  width: 100%; }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="password"]:focus,
-input[type="search"]:focus,
-textarea:focus {
-	color: #111;
-}
+th {
+  border-bottom: 1px solid #b7b7b7;
+  font-weight: bold;
+  padding: 0.75em 0;
+  text-align: left; }
 
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-input[type="search"] {
-	padding: 3px;
-}
+td {
+  border-bottom: 1px solid #DDD;
+  padding: 0.75em 0; }
 
-textarea {
-	overflow: auto; /* Removes default vertical scrollbar in IE6/7/8/9 */
-	padding-left: 3px;
-	vertical-align: top; /* Improves readability and alignment in all browsers */
-	width: 100%;
-}
+tr,
+td,
+th {
+  vertical-align: middle; }
 
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+dl {
+  margin-bottom: 0.75em; }
+  dl dt {
+    font-weight: bold;
+    margin-top: 0.75em; }
+  dl dd {
+    margin: 0; }
+
+button,
+input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap; }
+
+/*--------------------------------------------------------------
+2.0 Typography
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+4.0 Forms
+--------------------------------------------------------------*/
 /*--------------------------------------------------------------
 5.0 Navigation
 --------------------------------------------------------------*/
@@ -406,181 +772,414 @@ textarea {
 5.1 Links
 --------------------------------------------------------------*/
 a {
-	color: royalblue;
-}
-
-a:visited {
-	color: purple;
-}
-
-a:hover,
-a:focus,
-a:active {
-	color: midnightblue;
-}
+  color: #477DCA; }
+  a:visited {
+    color: #477DCA; }
+  a:hover, a:focus, a:active {
+    color: #2c5999; }
 
 /*--------------------------------------------------------------
 5.2 Menus
 --------------------------------------------------------------*/
-.main-navigation {
-	clear: both;
-	display: block;
-	float: left;
-	width: 100%;
-}
-
 .main-navigation ul {
-	list-style: none;
-	margin: 0;
-	padding-left: 0;
-}
-
+  list-style: none;
+  margin: 0;
+  padding-left: 0; }
+  .main-navigation ul ul {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    float: left;
+    position: absolute;
+    top: 1.5em;
+    left: -999em;
+    z-index: 99999; }
+    .main-navigation ul ul ul {
+      left: -999em;
+      top: 0; }
+    .main-navigation ul ul li:hover > ul {
+      left: 100%; }
+    .main-navigation ul ul a {
+      width: 200px; }
+  .main-navigation ul li:hover > ul {
+    left: auto; }
 .main-navigation li {
-	float: left;
-	position: relative;
-}
-
+  float: left;
+  position: relative;
+  margin-left: 26px;
+  font-size: 1.15em; }
 .main-navigation a {
-	display: block;
-	text-decoration: none;
-}
-
-.main-navigation ul ul {
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-	float: left;
-	position: absolute;
-	top: 1.5em;
-	left: -999em;
-	z-index: 99999;
-}
-
-.main-navigation ul ul ul {
-	left: -999em;
-	top: 0;
-}
-
-.main-navigation ul ul a {
-	width: 200px;
-}
-
-.main-navigation ul ul li {
-
-}
-
-.main-navigation li:hover > a {
-}
-
-.main-navigation ul ul :hover > a {
-}
-
-.main-navigation ul ul a:hover {
-}
-
-.main-navigation ul li:hover > ul {
-	left: auto;
-}
-
-.main-navigation ul ul li:hover > ul {
-	left: 100%;
-}
-
-.main-navigation .current_page_item > a,
-.main-navigation .current-menu-item > a,
-.main-navigation .current_page_ancestor > a {
-}
+  display: block;
+  text-decoration: none; }
 
 /* Small menu */
 .menu-toggle {
-	display: none;
-}
+  display: none; }
 
 @media screen and (max-width: 600px) {
-	.menu-toggle,
-	.main-navigation.toggled .nav-menu {
-		display: block;
-	}
+  .menu-toggle,
+  .main-navigation.toggled .nav-menu {
+    display: block; }
 
-	.main-navigation ul {
-		display: none;
-	}
-}
-
+  .main-navigation ul {
+    display: none; } }
 .site-main .comment-navigation,
 .site-main .paging-navigation,
 .site-main .post-navigation {
-	margin: 0 0 1.5em;
-	overflow: hidden;
-}
+  margin: 0 0 1.5em;
+  overflow: hidden; }
 
 .comment-navigation .nav-previous,
 .paging-navigation .nav-previous,
 .post-navigation .nav-previous {
-	float: left;
-	width: 50%;
-}
+  float: left;
+  width: 50%; }
 
 .comment-navigation .nav-next,
 .paging-navigation .nav-next,
 .post-navigation .nav-next {
-	float: right;
-	text-align: right;
-	width: 50%;
-}
+  float: right;
+  text-align: right;
+  width: 50%; }
 
 /*--------------------------------------------------------------
 6.0 Accessibility
 --------------------------------------------------------------*/
 /* Text meant only for screen readers */
 .screen-reader-text {
-	clip: rect(1px, 1px, 1px, 1px);
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-}
-
-.screen-reader-text:hover,
-.screen-reader-text:active,
-.screen-reader-text:focus {
-	background-color: #f1f1f1;
-	border-radius: 3px;
-	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-	clip: auto !important;
-	color: #21759b;
-	display: block;
-	font-size: 14px;
-	font-size: 1.4rem;
-	font-weight: bold;
-	height: auto;
-	left: 5px;
-	line-height: normal;
-	padding: 15px 23px 14px;
-	text-decoration: none;
-	top: 5px;
-	width: auto;
-	z-index: 100000; /* Above WP toolbar */
-}
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden; }
+  .screen-reader-text:hover, .screen-reader-text:active, .screen-reader-text:focus {
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #333;
+    display: block;
+    font-size: 25.888px;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+    /* Above WP toolbar */ }
 
 /*--------------------------------------------------------------
 7.0 Alignments
 --------------------------------------------------------------*/
 .alignleft {
-	display: inline;
-	float: left;
-	margin-right: 1.5em;
-}
+  display: inline;
+  float: left;
+  margin-right: 1.5em; }
 
 .alignright {
-	display: inline;
-	float: right;
-	margin-left: 1.5em;
-}
+  display: inline;
+  float: right;
+  margin-left: 1.5em; }
 
 .aligncenter {
-	clear: both;
-	display: block;
-	margin: 0 auto;
-}
+  display: block;
+  margin: 0 auto; }
+
+#main {
+  content: "";
+  display: table;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%; }
+  #main .one-wide {
+    margin-bottom: 1em;
+    background: blue;
+    display: block;
+    height: 200px; }
+    @media screen and (max-width: 24.9375em) {
+      #main .one-wide {
+        float: left;
+        display: block;
+        margin-right: 14.28571%;
+        width: 100%; }
+        #main .one-wide:last-child {
+          margin-right: 0; }
+        #main .one-wide:nth-child(1n) {
+          margin-right: 0; }
+        #main .one-wide:nth-child(1n+1) {
+          clear: left; } }
+    @media screen and (min-width: 25em) and (max-width: 43.75em) {
+      #main .one-wide {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 20%; }
+        #main .one-wide:last-child {
+          margin-right: 0; }
+        #main .one-wide:nth-child(4n) {
+          margin-right: 0; }
+        #main .one-wide:nth-child(4n+1) {
+          clear: left; } }
+    @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+      #main .one-wide {
+        float: left;
+        display: block;
+        margin-right: 3.22581%;
+        width: 13.97419%; }
+        #main .one-wide:last-child {
+          margin-right: 0; }
+        #main .one-wide:nth-child(6n) {
+          margin-right: 0; }
+        #main .one-wide:nth-child(6n+1) {
+          clear: left; } }
+    @media screen and (min-width: 68.75em) {
+      #main .one-wide {
+        float: left;
+        display: block;
+        margin-right: 2.12766%;
+        width: 6.38298%; }
+        #main .one-wide:last-child {
+          margin-right: 0; }
+        #main .one-wide:nth-child(12n) {
+          margin-right: 0; }
+        #main .one-wide:nth-child(12n+1) {
+          clear: left; } }
+  #main .two-wide {
+    margin-bottom: 1em;
+    background: red;
+    display: block;
+    height: 200px; }
+    @media screen and (max-width: 24.9375em) {
+      #main .two-wide {
+        float: left;
+        display: block;
+        margin-right: 14.28571%;
+        width: 100%; }
+        #main .two-wide:last-child {
+          margin-right: 0; }
+        #main .two-wide:nth-child(1n) {
+          margin-right: 0; }
+        #main .two-wide:nth-child(1n+1) {
+          clear: left; } }
+    @media screen and (min-width: 25em) and (max-width: 43.75em) {
+      #main .two-wide {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%; }
+        #main .two-wide:last-child {
+          margin-right: 0; }
+        #main .two-wide:nth-child(1n) {
+          margin-right: 0; }
+        #main .two-wide:nth-child(1n+1) {
+          clear: left; } }
+    @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+      #main .two-wide {
+        float: left;
+        display: block;
+        margin-right: 3.22581%;
+        width: 48.3871%; }
+        #main .two-wide:last-child {
+          margin-right: 0; }
+        #main .two-wide:nth-child(2n) {
+          margin-right: 0; }
+        #main .two-wide:nth-child(2n+1) {
+          clear: left; } }
+    @media screen and (min-width: 68.75em) {
+      #main .two-wide {
+        float: left;
+        display: block;
+        margin-right: 2.12766%;
+        width: 48.93617%; }
+        #main .two-wide:last-child {
+          margin-right: 0; }
+        #main .two-wide:nth-child(2n) {
+          margin-right: 0; }
+        #main .two-wide:nth-child(2n+1) {
+          clear: left; } }
+  #main .three-wide {
+    margin-bottom: 1em;
+    background: blue;
+    display: block;
+    height: 200px; }
+    @media screen and (max-width: 24.9375em) {
+      #main .three-wide {
+        float: left;
+        display: block;
+        margin-right: 14.28571%;
+        width: 100%; }
+        #main .three-wide:last-child {
+          margin-right: 0; }
+        #main .three-wide:nth-child(1n) {
+          margin-right: 0; }
+        #main .three-wide:nth-child(1n+1) {
+          clear: left; } }
+    @media screen and (min-width: 25em) and (max-width: 43.75em) {
+      #main .three-wide {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 46.66667%; }
+        #main .three-wide:last-child {
+          margin-right: 0; }
+        #main .three-wide:nth-child(2n) {
+          margin-right: 0; }
+        #main .three-wide:nth-child(2n+1) {
+          clear: left; } }
+    @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+      #main .three-wide {
+        float: left;
+        display: block;
+        margin-right: 3.22581%;
+        width: 22.58065%; }
+        #main .three-wide:last-child {
+          margin-right: 0; }
+        #main .three-wide:nth-child(4n) {
+          margin-right: 0; }
+        #main .three-wide:nth-child(4n+1) {
+          clear: left; } }
+    @media screen and (min-width: 68.75em) {
+      #main .three-wide {
+        float: left;
+        display: block;
+        margin-right: 2.12766%;
+        width: 23.40426%; }
+        #main .three-wide:last-child {
+          margin-right: 0; }
+        #main .three-wide:nth-child(4n) {
+          margin-right: 0; }
+        #main .three-wide:nth-child(4n+1) {
+          clear: left; } }
+  #main .four-wide {
+    margin-bottom: 1em;
+    background: green;
+    display: block;
+    height: 200px; }
+    @media screen and (max-width: 24.9375em) {
+      #main .four-wide {
+        float: left;
+        display: block;
+        margin-right: 14.28571%;
+        width: 100%; }
+        #main .four-wide:last-child {
+          margin-right: 0; }
+        #main .four-wide:nth-child(1n) {
+          margin-right: 0; }
+        #main .four-wide:nth-child(1n+1) {
+          clear: left; } }
+    @media screen and (min-width: 25em) and (max-width: 43.75em) {
+      #main .four-wide {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%; }
+        #main .four-wide:last-child {
+          margin-right: 0; }
+        #main .four-wide:nth-child(1n) {
+          margin-right: 0; }
+        #main .four-wide:nth-child(1n+1) {
+          clear: left; } }
+    @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+      #main .four-wide {
+        float: left;
+        display: block;
+        margin-right: 3.22581%;
+        width: 31.09677%; }
+        #main .four-wide:last-child {
+          margin-right: 0; }
+        #main .four-wide:nth-child(3n) {
+          margin-right: 0; }
+        #main .four-wide:nth-child(3n+1) {
+          clear: left; } }
+    @media screen and (min-width: 68.75em) {
+      #main .four-wide {
+        float: left;
+        display: block;
+        margin-right: 2.12766%;
+        width: 31.91489%; }
+        #main .four-wide:last-child {
+          margin-right: 0; }
+        #main .four-wide:nth-child(3n) {
+          margin-right: 0; }
+        #main .four-wide:nth-child(3n+1) {
+          clear: left; } }
+  #main .two-thirds {
+    margin-bottom: 1em;
+    background: pink;
+    display: block;
+    height: 200px; }
+    @media screen and (max-width: 24.9375em) {
+      #main .two-thirds {
+        float: left;
+        display: block;
+        margin-right: 14.28571%;
+        width: 100%; }
+        #main .two-thirds:last-child {
+          margin-right: 0; } }
+    @media screen and (min-width: 25em) and (max-width: 43.75em) {
+      #main .two-thirds {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%; }
+        #main .two-thirds:last-child {
+          margin-right: 0; } }
+    @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+      #main .two-thirds {
+        float: left;
+        display: block;
+        margin-right: 3.22581%;
+        width: 65.54839%; }
+        #main .two-thirds:last-child {
+          margin-right: 0; } }
+    @media screen and (min-width: 68.75em) {
+      #main .two-thirds {
+        float: left;
+        display: block;
+        margin-right: 2.12766%;
+        width: 65.95745%; }
+        #main .two-thirds:last-child {
+          margin-right: 0; } }
+  #main .one-third {
+    margin-bottom: 1em;
+    background: olive;
+    display: block;
+    height: 200px;
+    margin-right: 0; }
+    @media screen and (max-width: 24.9375em) {
+      #main .one-third {
+        float: left;
+        display: block;
+        margin-right: 14.28571%;
+        width: 100%; }
+        #main .one-third:last-child {
+          margin-right: 0; } }
+    @media screen and (min-width: 25em) and (max-width: 43.75em) {
+      #main .one-third {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%; }
+        #main .one-third:last-child {
+          margin-right: 0; } }
+    @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+      #main .one-third {
+        float: left;
+        display: block;
+        margin-right: 3.22581%;
+        width: 31.09677%; }
+        #main .one-third:last-child {
+          margin-right: 0; } }
+    @media screen and (min-width: 68.75em) {
+      #main .one-third {
+        float: left;
+        display: block;
+        margin-right: 2.12766%;
+        width: 31.91489%; }
+        #main .one-third:last-child {
+          margin-right: 0; } }
 
 /*--------------------------------------------------------------
 8.0 Clearings
@@ -597,9 +1196,8 @@ a:active {
 .site-content:after,
 .site-footer:before,
 .site-footer:after {
-	content: "";
-	display: table;
-}
+  content: "";
+  display: table; }
 
 .clear:after,
 .entry-content:after,
@@ -607,93 +1205,192 @@ a:active {
 .site-header:after,
 .site-content:after,
 .site-footer:after {
-	clear: both;
-}
+  clear: both; }
 
 /*--------------------------------------------------------------
 9.0 Widgets
 --------------------------------------------------------------*/
 .widget {
-	margin: 0 0 1.5em;
-}
-
-/* Make sure select elements fit in widgets */
-.widget select {
-	max-width: 100%;
-}
+  margin: 0 0 1.5em;
+  /* Make sure select elements fit in widgets */ }
+  .widget select {
+    max-width: 100%; }
 
 /* Search widget */
 .widget_search .search-submit {
-	display: none;
-}
+  display: none; }
 
 /*--------------------------------------------------------------
 10.0 Content
 --------------------------------------------------------------*/
+/* Scss Document */
+header#masthead {
+  width: 100%;
+  background: #FFF;
+  position: fixed;
+  height: 100px;
+  z-index: 9999;
+  top: 0; }
+  header#masthead .wrap {
+    content: "";
+    display: table;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; }
+    header#masthead .wrap .site-branding {
+      margin-bottom: 1em; }
+      @media screen and (max-width: 24.9375em) {
+        header#masthead .wrap .site-branding {
+          float: left;
+          display: block;
+          margin-right: 14.28571%;
+          width: 100%; }
+          header#masthead .wrap .site-branding:last-child {
+            margin-right: 0; } }
+      @media screen and (min-width: 25em) and (max-width: 43.75em) {
+        header#masthead .wrap .site-branding {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%; }
+          header#masthead .wrap .site-branding:last-child {
+            margin-right: 0; } }
+      @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+        header#masthead .wrap .site-branding {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 31.09677%; }
+          header#masthead .wrap .site-branding:last-child {
+            margin-right: 0; } }
+      @media screen and (min-width: 68.75em) {
+        header#masthead .wrap .site-branding {
+          float: left;
+          display: block;
+          margin-right: 2.12766%;
+          width: 31.91489%; }
+          header#masthead .wrap .site-branding:last-child {
+            margin-right: 0; } }
+      header#masthead .wrap .site-branding h1.site-title a {
+        font-family: "freight-display-pro";
+        font-weight: 700;
+        color: #232323; }
+        header#masthead .wrap .site-branding h1.site-title a span:last-of-type {
+          color: #880d10; }
+    header#masthead .wrap nav#site-navigation {
+      margin-bottom: 1em;
+      margin-right: 0;
+      padding-top: 38px; }
+      @media screen and (max-width: 24.9375em) {
+        header#masthead .wrap nav#site-navigation {
+          float: left;
+          display: block;
+          margin-right: 14.28571%;
+          width: 100%; }
+          header#masthead .wrap nav#site-navigation:last-child {
+            margin-right: 0; } }
+      @media screen and (min-width: 25em) and (max-width: 43.75em) {
+        header#masthead .wrap nav#site-navigation {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%; }
+          header#masthead .wrap nav#site-navigation:last-child {
+            margin-right: 0; } }
+      @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+        header#masthead .wrap nav#site-navigation {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 65.54839%; }
+          header#masthead .wrap nav#site-navigation:last-child {
+            margin-right: 0; } }
+      @media screen and (min-width: 68.75em) {
+        header#masthead .wrap nav#site-navigation {
+          float: left;
+          display: block;
+          margin-right: 2.12766%;
+          width: 65.95745%; }
+          header#masthead .wrap nav#site-navigation:last-child {
+            margin-right: 0; } }
+      header#masthead .wrap nav#site-navigation .menu-main-navigation-container {
+        float: right; }
+        header#masthead .wrap nav#site-navigation .menu-main-navigation-container ul {
+          width: 100%; }
+
+body.admin-bar header#masthead {
+  top: 28px; }
+
+/* Scss Document */
+div#content {
+  z-index: 800;
+  position: relative;
+  padding-top: 100px; }
+
+/* Scss Document */
+footer#colophon .site-info {
+  content: "";
+  display: table;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%; }
+
 /*--------------------------------------------------------------
 10.1 Posts and pages
 --------------------------------------------------------------*/
 .sticky {
-	display: block;
-}
+  display: block; }
 
 .hentry {
-	margin: 0 0 1.5em;
-}
+  margin: 0 0 1.5em; }
 
 .byline,
 .updated:not(.published) {
-	display: none;
-}
+  display: none; }
 
 .single .byline,
 .group-blog .byline {
-	display: inline;
-}
+  display: inline; }
 
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
-}
+  margin: 1.5em 0 0; }
 
 .page-links {
-	clear: both;
-	margin: 0 0 1.5em;
-}
+  clear: both;
+  margin: 0 0 1.5em; }
 
 /*--------------------------------------------------------------
 10.2 Asides
 --------------------------------------------------------------*/
 .blog .format-aside .entry-title,
 .archive .format-aside .entry-title {
-	display: none;
-}
+  display: none; }
 
 /*--------------------------------------------------------------
 10.3 Comments
 --------------------------------------------------------------*/
 .comment-content a {
-	word-wrap: break-word;
-}
+  word-wrap: break-word; }
 
 .bypostauthor {
-	display: block;
-}
+  display: block; }
 
 /*--------------------------------------------------------------
 11.0 Infinite scroll
 --------------------------------------------------------------*/
 /* Globally hidden elements when Infinite Scroll is supported and in use. */
-.infinite-scroll .paging-navigation, /* Older / Newer Posts Navigation (always hidden) */
-.infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
-	display: none;
-}
+.infinite-scroll .paging-navigation,
+.infinite-scroll.neverending .site-footer {
+  /* Theme Footer (when set to scrolling) */
+  display: none; }
 
 /* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
 .infinity-end.neverending .site-footer {
-	display: block;
-}
+  display: block; }
 
 /*--------------------------------------------------------------
 12.0 Media
@@ -701,86 +1398,67 @@ a:active {
 .page-content img.wp-smiley,
 .entry-content img.wp-smiley,
 .comment-content img.wp-smiley {
-	border: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding: 0;
-}
+  border: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0; }
 
 /* Make sure embeds and iframes fit their containers */
 embed,
 iframe,
 object {
-	max-width: 100%;
-}
+  max-width: 100%; }
 
 /*--------------------------------------------------------------
 12.1 Captions
 --------------------------------------------------------------*/
 .wp-caption {
-	margin-bottom: 1.5em;
-	max-width: 100%;
-}
-
-.wp-caption img[class*="wp-image-"] {
-	display: block;
-	margin: 0 auto;
-}
+  margin-bottom: 1.5em;
+  max-width: 100%; }
+  .wp-caption img[class*="wp-image-"] {
+    display: block;
+    margin: 0 auto; }
+  .wp-caption .wp-caption-text {
+    margin: 0.8075em 0; }
 
 .wp-caption-text {
-	text-align: center;
-}
-
-.wp-caption .wp-caption-text {
-	margin: 0.8075em 0;
-}
+  text-align: center; }
 
 /*--------------------------------------------------------------
 12.2 Galleries
 --------------------------------------------------------------*/
 .gallery {
-	margin-bottom: 1.5em;
-}
+  margin-bottom: 1.5em; }
 
 .gallery-item {
-	display: inline-block;
-	text-align: center;
-	vertical-align: top;
-	width: 100%;
-}
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  width: 100%; }
 
 .gallery-columns-2 .gallery-item {
-	max-width: 50%;
-}
+  max-width: 50%; }
 
 .gallery-columns-3 .gallery-item {
-	max-width: 33.33%;
-}
+  max-width: 33.33%; }
 
 .gallery-columns-4 .gallery-item {
-	max-width: 25%;
-}
+  max-width: 25%; }
 
 .gallery-columns-5 .gallery-item {
-	max-width: 20%;
-}
+  max-width: 20%; }
 
 .gallery-columns-6 .gallery-item {
-	max-width: 16.66%;
-}
+  max-width: 16.66%; }
 
 .gallery-columns-7 .gallery-item {
-	max-width: 14.28%;
-}
+  max-width: 14.28%; }
 
 .gallery-columns-8 .gallery-item {
-	max-width: 12.5%;
-}
+  max-width: 12.5%; }
 
 .gallery-columns-9 .gallery-item {
-	max-width: 11.11%;
-}
+  max-width: 11.11%; }
 
 .gallery-caption {
-	display: block;
-}
+  display: block; }

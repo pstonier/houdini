@@ -13,3 +13,48 @@
 .aligncenter {
 	@include center-block;
 }
+
+#main {
+	@include outer-container;
+	@include fill-parent;
+	
+	.one-wide {
+		@include one-column;
+		background:blue;
+		display:block;
+		height:200px;
+	}
+	
+	.two-wide {
+		@include one-half;
+		background:red;
+		display:block;
+		height:200px;
+	}
+	
+	.three-wide {
+		@include one-quarter;
+		background:blue;
+		display:block;
+		height:200px;
+	}
+	.four-wide {
+		@include one-third;
+		background:green;
+		display:block;
+		height:200px;
+	}
+	.two-thirds {
+		@include two-thirds-nom;
+		background:pink;
+		display:block;
+		height:200px;	
+	}
+	.one-third {
+		@include one-third-nom;
+		background:olive;
+		display:block;
+		height:200px;
+		@include omega;
+	}
+}

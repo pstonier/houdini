@@ -1,5 +1,8 @@
 // Typography
-$base-font-family: "Trade Gothic W01";
+$serif-text: "freight-text-pro";
+$serif-display: "freight-display-pro";
+$sans-serif: "freight-sans-pro";
+$base-font-family: 	$serif-text;
 $header-font-family: $base-font-family;
 
 // Font Sizes
@@ -26,6 +29,7 @@ $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #DDD;
 $white: #FFF;
+$red: #880d10;
 
 // Background Color
 $base-background-color: white;

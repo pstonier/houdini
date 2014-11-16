@@ -14,6 +14,16 @@ header#masthead {
 		
 		.site-branding {
 			@include one-third-nom;
+			
+			h1.site-title a {
+				font-family: $serif-display;
+				font-weight:700;
+				color: #232323;
+			
+				span:last-of-type {
+					color:$red;	
+				}
+			}
 		}
 		nav#site-navigation {
 			@include two-thirds-nom;

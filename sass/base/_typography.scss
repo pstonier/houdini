@@ -1,6 +1,3 @@
-@import "trade-gothic";
-
-
 body {
   @include font-feature-settings("kern","liga","frac", "pnum");
   -webkit-font-smoothing: antialiased;

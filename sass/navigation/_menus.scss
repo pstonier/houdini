@@ -1,8 +1,4 @@
 .main-navigation {
-	clear: both;
-	display: block;
-	float: left;
-	width: 100%;
 
 	ul {
 		list-style: none;
@@ -46,6 +42,8 @@
 	li {
 		float: left;
 		position: relative;
+		margin-left: 26px;
+		font-size: 1.15em;
 
 		&:hover > a {
 		}
