@@ -1,0 +1,35 @@
+/* Scss Document */
+
+header#masthead {
+	width:100%;
+	background:$white;
+	position: fixed;
+	height: 100px;
+	z-index: 9999;
+	top: 0;
+	
+	.wrap {
+		@include outer-container;
+		@include fill-parent;
+		
+		.site-branding {
+			@include one-third-nom;
+		}
+		nav#site-navigation {
+			@include two-thirds-nom;
+			@include omega();
+			padding-top: 38px;
+			
+			.menu-main-navigation-container {
+				float: right;
+			
+				ul {
+					@include fill-parent;	
+				}
+			}
+		}
+	}
+}
+body.admin-bar header#masthead {
+	top: 28px;
+}
