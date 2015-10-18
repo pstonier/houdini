@@ -21,8 +21,14 @@
 	clear: both;
 }
 
+//transparent colors
+@mixin transparent-background($color, $opacity: 1) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}
+
+
 @mixin one-column {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
@@ -42,8 +48,27 @@
 	}
 }
 
+@mixin full-width {
+	
+	@include media($small-screen) {
+		@include span-columns(2);
+		@include omega;
+	}
+	@include media($medium-screen) {
+		@include span-columns(4);
+		@include omega;
+	}
+	@include media($large-screen) {
+		@include span-columns(8);
+		@include omega;
+	}
+	@include media($xl-screen) {
+		@include span-columns(12);
+		@include omega;
+	}
+}
+
 @mixin one-quarter {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
@@ -65,7 +90,6 @@
 
 
 @mixin one-quarter-nom {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
@@ -81,8 +105,24 @@
 	}
 }
 
+
+@mixin three-quarters-nom {
+	
+	@include media($small-screen) {
+		@include span-columns(2);
+	}
+	@include media($medium-screen) {
+		@include span-columns(2);
+	}
+	@include media($large-screen) {
+		@include span-columns(6);
+	}
+	@include media($xl-screen) {
+		@include span-columns(9);
+	}
+}
+
 @mixin one-third {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
@@ -103,7 +143,6 @@
 }
 
 @mixin one-third-nom {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
@@ -120,7 +159,6 @@
 }
 
 @mixin two-thirds-nom {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
@@ -137,7 +175,6 @@
 }
 
 @mixin one-half {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
@@ -157,7 +194,6 @@
 	}
 }
 @mixin one-half-nom {
-	margin-bottom:1em;
 	
 	@include media($small-screen) {
 		@include span-columns(2);
