@@ -26,3 +26,24 @@
 	clear: both;
 	margin: 0 0 1.5em;
 }
+article {
+	max-width: 700px;
+	margin: 0px auto;
+	
+	header {
+		font-weight: 700;
+		text-align: center;
+		padding: 2em 0;
+		background: brown;
+		color: white;
+	}
+	p {
+		font-size: 1.3em;
+		line-height: 1.4em;
+	}
+	
+	img {
+		width:100%;
+		height:auto;	
+	}
+}

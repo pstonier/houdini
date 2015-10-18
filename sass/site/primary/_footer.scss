@@ -1,8 +1,16 @@
 /* Scss Document */
 
 footer#colophon {
+	@include outer-container;
+	border-top: 7px solid $brown;
+	padding-top: 1em;
+	padding-bottom: 5em;
+	text-align:center;
+	@include fill-parent;
+	font-family: $sans-serif;
+	
+	
 	.site-info {
-		@include outer-container;
 		@include fill-parent;	
 	}
 }

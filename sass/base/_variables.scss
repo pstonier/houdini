@@ -1,6 +1,5 @@
 // Typography
 $serif-text: "freight-text-pro";
-$serif-display: "freight-display-pro";
 $sans-serif: "freight-sans-pro";
 $base-font-family: 	$serif-text;
 $header-font-family: $base-font-family;
@@ -30,16 +29,18 @@ $medium-gray: #999;
 $light-gray: #DDD;
 $white: #FFF;
 $red: #880d10;
+$brown: #433000;
+$green: #00aab5;
 
 // Background Color
-$base-background-color: white;
+$base-background-color: rgb(247, 242, 219);
 
 // Font Colors
-$base-font-color: $dark-gray;
-$base-accent-color: $blue;
+$base-font-color: $brown;
+$base-accent-color: lighten($brown,30);
 
 // Link Colors
-$base-link-color: $base-accent-color;
+$base-link-color: $brown;
 $hover-link-color: darken($base-accent-color, 15);
 $base-button-color: $base-link-color;
 $hover-button-color: $hover-link-color;
