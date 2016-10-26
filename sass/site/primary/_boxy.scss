@@ -1,0 +1,226 @@
+.page, .single-event {
+  article {
+    margin: 0;
+  }
+  section.row {
+    clear: both;
+    position: relative;
+    width: 100%;
+    @include clearfix;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 3.5em 0;
+    @include media($small-screen) {
+      padding: 0;
+    }
+    @include media(max-width 800px) {
+      @include outer-container();
+    }
+    
+    h2.section-title {
+      margin-top:0;
+      margin-bottom:1em;
+    }
+    
+    &.gallery .description {
+      margin-top:1em;
+    }
+
+    &:before {}
+    .gallery-cell {
+      height: 200px;
+      @include media($xl-screen) {
+        height: 300px;
+      }
+      @include media($small-screen) {
+        height: 120px;
+      }
+    }
+    .flickity-slider,
+    .flickity-page-dots,
+    .flickity-prev-next-button,
+    .flickity-prev-next-button svg {
+      position: absolute;
+    }
+    .flickity-slider img {
+      float: none !important;
+      max-width: none !important;
+      height: 100%;
+      display: table-cell;
+    }
+    .row {
+      @include full-width;
+      padding: 0 4%;
+    }
+    .centered-column {
+      padding: 0 4%;
+      clear: both;
+      @include media(min-width $second-breakpoint-value) {
+        text-align: center;
+      }
+    }
+    a {
+      color: $white;
+      font-weight: 700;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    header {
+      text-align: center;
+      padding: 0 5%;
+      h3 {
+        font-size: 3em;
+        @include media($medium-screen) {
+          font-size: 2em;
+        }
+        @include media($small-screen) {
+          font-size: 1.8em;
+        }
+      }
+      h4 {
+        @include media($small-screen) {
+          font-size: 1.2em;
+        }
+      }
+    }
+    @include media(min-width 750px) {
+      .box {
+        background-color: rgba(255, 255, 255, 0.79);
+        float: right;
+        padding: 2em;
+        box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.3);
+        margin-left: 3%;
+        color: #004280;
+      }
+      .content-box {
+        @include media(min-width 900px) {
+          font-size: 1.5em;
+        }
+        padding: 1em;
+      }
+    }
+    canvas {
+      display: inline-block;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 2em;
+      margin: 0px;
+      @include media($xl-screen) {
+        font-size: 3em;
+      }
+    }
+    h2 {
+      font-size: 1.5em;
+      font-weight: 700;
+      @include media(min-width 480px) {
+        font-size: 1.2em;
+      }
+      @include media($xl-screen) {
+        font-size: 2em;
+      }
+      &.section-title {
+        @include media(min-width $nav-breakpoint-value) {
+          text-align: center;
+        }
+      }
+    }
+    h3 {
+      font-size: .64em;
+      font-weight: 700;
+      @include media(min-width 400px) {
+        font-size: .8em;
+      }
+      @include media(min-width 480px) {
+        font-size: 1em;
+      }
+    }
+    p {
+      max-width: 800px;
+      margin: 0px auto;
+    }
+    ul li {
+      font-size: .64em;
+      @include media(min-width 400px) {
+        font-size: .8em;
+      }
+      @include media(min-width 480px) {
+        font-size: 1em;
+      }
+    }
+    #requestDemo {
+      padding-top: 1em;
+      padding-bottom: 8em;
+      h3 {
+        padding-bottom: 20px;
+      }
+      .button {
+        background: #004280;
+        border-radius: 1em;
+        border: 1px solid $white;
+        padding: .6em 1.2em;
+        &:hover {
+          background: #074290;
+          color: #EBEFFF;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  section.row .left-block {
+    @include one-half-nom;
+    display: block;
+    clear: both;
+    padding: 3% 4%;
+    @media screen and (min-width: 600px) {
+      img {
+        float: right;
+      }
+    }
+    @include media($small-screen) {
+      padding-bottom: 0;
+      margin-bottom: .2em;
+    }
+  }
+  section.row .right-block {
+    @include one-half-nom;
+    display: block;
+    overflow: hidden;
+    padding: 3% 4%;
+    margin-right: 0 !important;
+    @media screen and (min-width: 600px) {
+      img {
+        float: left;
+      }
+    }
+    @include media(min-width $second-breakpoint-value) {
+      padding-top: 0;
+    }
+  }
+  section.row:nth-child(odd) {
+    background-color: $blue;
+    color: $white;
+  }
+  section.row:nth-child(even) {
+    background-color: $light-blue;
+    color: $white;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: .25;
+      z-index: 0;
+    }
+  }
+}

@@ -4,6 +4,8 @@
 		list-style: none;
 		margin: 0;
 		padding-left: 0;
+		font-family: $sans-serif;
+		
 
 		ul {
 			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
@@ -26,6 +28,7 @@
 
 			a {
 				width: 200px;
+				font-weight:700;
 			}
 
 			:hover > a {
@@ -42,8 +45,10 @@
 	li {
 		float: left;
 		position: relative;
-		margin-left: 26px;
+		margin-right: 1.5em;
 		font-size: 1.15em;
+		
+		&:last-child { margin-right:0; }
 
 		&:hover > a {
 		}

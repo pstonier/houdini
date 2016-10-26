@@ -12,9 +12,8 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'houdini' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'houdini' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'houdini' ), 'houdini', '<a href="http://paulstonier.com/" rel="designer">Paul Stonier</a>' ); ?>
+			<?php dynamic_sidebar( 'footer-1' ); ?>
+			<p class="copyright"><?php echo date('Y'); ?> &copy; Copyright, Live Well Upstate. All Rights Reserved</p>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

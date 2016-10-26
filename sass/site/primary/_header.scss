@@ -2,9 +2,9 @@
 
 header#masthead {
 	width:100%;
-	background:$white;
-	position: fixed;
-	height: 100px;
+	background-color: rgb(255, 253, 246);
+	position: relative;
+	height: 270px;
 	z-index: 9999;
 	top: 0;
 	
@@ -13,22 +13,26 @@ header#masthead {
 		@include fill-parent;
 		
 		.site-branding {
-			@include one-third-nom;
+			@include fill-parent;
+			text-align:center;
 			
 			h1.site-title a {
-				font-family: $serif-display;
 				font-weight:700;
-				color: #232323;
-			
-				span:last-of-type {
-					color:$red;	
-				}
+				display: inline-block;
+				padding: 2% 3% .5%;
+				border-bottom: 1px solid cyan;
+				width: 420px;
+			}
+			h2.site-description {
+				font-family:$sans-serif;
+				font-size: 1.3em;
+				font-weight: 100;
+				line-height: 2.2em;
 			}
 		}
 		nav#site-navigation {
-			@include two-thirds-nom;
-			@include omega();
-			padding-top: 38px;
+			@fill-parent;
+			margin-top:-40px;
 			
 			.menu-main-navigation-container {
 				float: right;
@@ -36,6 +40,9 @@ header#masthead {
 				ul {
 					@include fill-parent;	
 				}
+			}
+			.menu-main-nav-right-container {
+				float: right;
 			}
 		}
 	}
