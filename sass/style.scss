@@ -7,7 +7,7 @@ Description: Base theme for Live Well Upstate
 Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: houdini
+Text Domain: livewell
 Tags:starter theme with semantic grid
 */
 
@@ -34,17 +34,17 @@ Tags:starter theme with semantic grid
 	12.1 Captions
 	12.2 Galleries
 --------------------------------------------------------------*/
-@import "compass";
-@import "extend/bourbon";
+
+@import "vendor/bourbon/bourbon";
 @import "base/grid-settings";
-@import "extend/neat";
+@import "vendor/neat/neat";
 @import "mixins/mixins-master";
 
 
 /*--------------------------------------------------------------
 1.0 Reset
 --------------------------------------------------------------*/
-@import "compass/reset";
+
 @import "base/base";
 
 /*--------------------------------------------------------------

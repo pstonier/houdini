@@ -31,7 +31,7 @@ header#masthead {
 			}
 		}
 		nav#site-navigation {
-			@fill-parent;
+			@include fill-parent;
 			margin-top:-40px;
 			
 			.menu-main-navigation-container {

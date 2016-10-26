@@ -100,16 +100,7 @@
         padding: 1em;
       }
     }
-    canvas {
-      display: inline-block;
-      position: absolute;
-      width: 100%;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-    }
+    
     h1 {
       font-weight: 700;
       font-size: 2em;
@@ -154,24 +145,6 @@
       }
       @include media(min-width 480px) {
         font-size: 1em;
-      }
-    }
-    #requestDemo {
-      padding-top: 1em;
-      padding-bottom: 8em;
-      h3 {
-        padding-bottom: 20px;
-      }
-      .button {
-        background: #004280;
-        border-radius: 1em;
-        border: 1px solid $white;
-        padding: .6em 1.2em;
-        &:hover {
-          background: #074290;
-          color: #EBEFFF;
-          text-decoration: none;
-        }
       }
     }
   }

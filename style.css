@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*
 Theme Name: Live Well Upstate
 Theme URI: http://livewellupstate.com/
@@ -8,7 +7,7 @@ Description: Base theme for Live Well Upstate
 Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: houdini
+Text Domain: livewell
 Tags:starter theme with semantic grid
 */
 /*--------------------------------------------------------------
@@ -34,502 +33,22 @@ Tags:starter theme with semantic grid
 	12.1 Captions
 	12.2 Galleries
 --------------------------------------------------------------*/
-/**
- * Returns a media context (media query / grid context) that can be stored in a variable and passed to `media()` as a single-keyword argument. Media contexts defined using `new-breakpoint` are used by the visual grid, as long as they are defined before importing Neat.
- *
- * @param {List} $query
- *   - A list of media query features and values. Each `$feature` should have a corresponding `$value`. If there is only a single `$value` in `$query`, `$default-feature` is going to be used. The number of total columns in the grid can be set by passing `$columns` at the end of the list (overrides `$total-columns`). For a list of valid values for `$feature`, click [here](http://www.w3.org/TR/css3-mediaqueries/#media1).
- *
- * @param {Number (unitless)} $total-columns ($grid-columns)
- *   - Number of columns to use in the new grid context. Can be set as a shorthand in the first parameter.
- *
- * @example scss - Usage
- *   $mobile: new-breakpoint(max-width 480px 4);
- *
- *   .element {
- *     @include media($mobile) {
- *       @include span-columns(4);
- *     }
- *   }
- *
- * @example css - CSS Output
- *   @media screen and (max-width: 480px) {
- *     .element {
- *       display: block;
- *       float: left;
- *       margin-right: 7.42297%;
- *       width: 100%;
- *     }
- *     .element:last-child {
- *       margin-right: 0;
- *     }
- *   }
- */
-/**
- * Sets the relative width of a single grid column. The unit used should be the same one used to define `$gutter`. To learn more about golden-ratio() see [Bourbon docs](http://bourbon.io/docs/#golden-ratio). Set with a `!global` flag.
- *
- * @type Number (Unit)
- */
-/**
- * Sets the relative width of a single grid gutter. The unit used should be the same one used to define `$column`. To learn more about golden-ratio() see [Bourbon docs](http://bourbon.io/docs/#golden-ratio). Set with the `!global` flag.
- *
- * @type Number (Unit)
- */
-/**
- * Sets the total number of columns in the grid. Its value can be overridden inside a media query using the `media()` mixin. Set with the `!global` flag.
- *
- * @type Number (Unitless)
- */
-/**
- * Sets the max-width property of the element that includes `outer-container()`. To learn more about `em()` see [Bourbon docs](http://bourbon.io/docs/#px-to-em). Set with the `!global` flag.
- *
- * @type Number (Unit)
- */
-/**
- * When set to true, it sets the box-sizing property of all elements to `border-box`. Set with a `!global` flag.
- *
- * @type Bool
- *
- * @example css - CSS Output
- *   * {
- *     -webkit-box-sizing: border-box;
- *     -moz-box-sizing: border-box;
- *     box-sizing: border-box;
- *   }
- */
-/**
- * Sets the default [media feature](http://www.w3.org/TR/css3-mediaqueries/#media) that `media()` and `new-breakpoint()` revert to when only a breakpoint value is passed. Set with a `!global` flag.
- *
- * @type String
- */
-/**
- * Sets the default layout direction of the grid. Can be `LTR` or `RTL`. Set with a `!global` flag.
- *
- * @type String
- */
-/**
- * Displays the visual grid when set to true. The overlaid grid may be few pixels off depending on the browser's rendering engine and pixel rounding algorithm. Set with the `!global` flag.
- *
- * @type Bool
- */
-/**
- * Sets the visual grid color. Set with `!global` flag.
- *
- * @type Color
- */
-/**
- * Sets the `z-index` property of the visual grid. Can be `back` (behind content) or `front` (in front of content). Set with `!global` flag.
- *
- * @type String
- */
-/**
- * Sets the opacity property of the visual grid. Set with `!global` flag.
- *
- * @type Number (unitless)
- */
-/**
- * Disable all deprecation warnings. Defaults to `false`. Set with a `!global` flag.
- *
- * @type Bool
- */
-/* Neat 1.7.0.pre
- * http://neat.bourbon.io
- * Copyright 2012-2014 thoughtbot, inc.
- * MIT License */
+/* line 4, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_box-sizing.scss */
 html {
   box-sizing: border-box; }
 
-*, *:before, *:after {
+/* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_box-sizing.scss */
+*, *::after, *::before {
   box-sizing: inherit; }
 
-/**
- * Removes the element's gutter margin, regardless of its position in the grid hierarchy or display property. It can target a specific element, or every `nth-child` occurrence. Works only with `block` layouts.
- *
- * @param {List} $query (block)
- *   List of arguments. Supported arguments are `nth-child` selectors (targets a specific pseudo element) and `auto` (targets `last-child`).
- *
- *   When passed an `nth-child` argument of type `*n` with `block` display, the omega mixin automatically adds a clear to the `*n+1` th element. Note that composite arguments such as `2n+1` do not support this feature.
- *
- *   **Deprecation warning**: The omega mixin will no longer take a `$direction` argument. To change the layout direction, use `row($direction)` or set `$default-layout-direction` instead.
- *
- * @example scss - Usage
- *   .element {
- *     @include omega;
- *   }
- *
- *   .nth-element {
- *     @include omega(4n);
- *   }
- *
- * @example css - CSS Output
- *   .element {
- *     margin-right: 0;
- *   }
- *
- *   .nth-element:nth-child(4n) {
- *     margin-right: 0;
- *   }
- *
- *   .nth-element:nth-child(4n+1) {
- *     clear: left;
- *   }
- */
-/**
- * Makes an element a outer container by centring it in the viewport, clearing its floats, and setting its `max-width`.
- * Although optional, using `outer-container` is recommended. The mixin can be called on more than one element per page, as long as they are not nested.
- *
- * @param {Number (unit)} $local-max-width ($max-width)
- *   Max width to be applied to the element. Can be a percentage or a measure.
- *
- * @example scss - Usage
- *   .element {
- *     @include outer-container(100%);
- *   }
- *
- * @example css - CSS Output
- *   .element {
- *     *zoom: 1;
- *     max-width: 100%;
- *     margin-left: auto;
- *     margin-right: auto;
- *   }
- *
- *   .element:before, .element:after {
- *     content: " ";
- *     display: table;
- *   }
- *
- *   .element:after {
- *     clear: both;
- *   }
- */
-/**
- * Specifies the number of columns an element should span. If the selector is nested the number of columns of its parent element should be passed as an argument as well.
- *
- * @param {List} $span
- *   A list containing `$columns`, the unitless number of columns the element spans (required), and `$container-columns`, the number of columns the parent element spans (optional).
- *
- *   If only one value is passed, it is assumed that it's `$columns` and that that `$container-columns` is equal to `$grid-columns`, the total number of columns in the grid.
- *
- *   The values can be separated with any string such as `of`, `/`, etc.
- *
- * @param {String} $display (block)
- *   Sets the display property of the element. By default it sets the display propert of the element to `block`.
- *
- *   If passed `block-collapse`, it also removes the margin gutter by adding it to the element width.
- *
- *   If passed `table`, it sets the display property to `table-cell` and calculates the width of the element without taking gutters into consideration. The result does not align with the block-based grid.
- *
- * @example scss - Usage
- *   .element {
- *     @include span-columns(6);
-
- *    .nested-element {
- *      @include span-columns(2 of 6);
- *    }
- *  }
- *
- * @example css - CSS Output
- *   .element {
- *     display: block;
- *     float: left;
- *     margin-right: 2.35765%;
- *     width: 48.82117%;
- *   }
- *
- *   .element:last-child {
- *     margin-right: 0;
- *   }
- *
- *   .element .nested-element {
- *     display: block;
- *     float: left;
- *     margin-right: 4.82916%;
- *     width: 30.11389%;
- *   }
- *
- *   .element .nested-element:last-child {
- *     margin-right: 0;
- *   }
- */
-/**
- * Designates the element as a row of columns in the grid layout. It clears the floats on the element and sets its display property. Rows can't be nested, but there can be more than one row element—with different display properties—per layout.
- *
- * @param {String} $display (default)
- *   Sets the display property of the element and the display context that will be used by its children. Can be `block` or `table`.
- *
- * @param {String} $direction ($default-layout-direction)
- *   Sets the layout direction. Can be `LTR` (left-to-right) or `RTL` (right-to-left).
- *
- * @example scss - Usage
- *   .element {
- *     @include row();
- *   }
- *
- * @example css - CSS Output
- *   .element {
- *     *zoom: 1;
- *     display: block;
- *   }
- *
- *  .element:before, .element:after {
- *    content: " ";
- *    display: table;
- *  }
- *
- *  .element:after {
- *    clear: both;
- *  }
- */
-/**
- * Translates an element horizontally by a number of columns. Positive arguments shift the element to the active layout direction, while negative ones shift it to the opposite direction.
- *
- * @param {Number (unitless)} $n-columns (1)
- *   Number of columns by which the element shifts.
- *
- * @example scss - Usage
- *   .element {
- *     @include shift(-3);
- *   }
- *
- * @example css - CSS output
- *   .element {
- *     margin-left: -25.58941%;
- *   }
- */
-/**
- * Translates an element horizontally by a number of columns, in a specific nesting context.
- *
- * @param {List} $shift
- *   A list containing the number of columns to shift (`$columns`) and the number of columns of the parent element (`$container-columns`).
- *
- *   The two values can be separated with any string such as `of`, `/`, etc.
- *
- * @example scss - Usage
- *   .element {
- *     @include shift(-3 of 6);
- *   }
- *
- * @example css - CSS output
- *   .element {
- *     margin-left: -52.41458%;
- *   }
- */
-/**
- * Adds padding to the element.
- *
- * @param {List} $padding (flex-gutter())
- *   A list of padding value(s) to use. Passing `default` in the list will result in using the gutter width as a padding value.
- *
- * @example scss - Usage
- *   .element {
- *     @include pad(30px -20px 10px default);
- *   }
- *
- * @example css - CSS Output
- *   .element {
- *     padding: 30px -20px 10px 2.35765%;
- *   }
- */
-/**
- * Forces the element to fill its parent container.
- *
- * @example scss - Usage
- *   .element {
- *     @include fill-parent;
- *   }
- *
- * @example css - CSS Output
- *   .element {
- *     width: 100%;
- *     -webkit-box-sizing: border-box;
- *     -moz-box-sizing: border-box;
- *     box-sizing: border-box;
- *   }
- */
-/**
- * Outputs a media-query block with an optional grid context (the total number of columns used in the grid).
- *
- * @param {List} $query
- *   A list of media query features and values, where each `$feature` should have a corresponding `$value`.
- *   For a list of valid values for `$feature`, click [here](http://www.w3.org/TR/css3-mediaqueries/#media1).
- *
- *   If there is only a single `$value` in `$query`, `$default-feature` is going to be used.
- *
- *   The number of total columns in the grid can be set by passing `$columns` at the end of the list (overrides `$total-columns`).
- *
- *
- * @param {Number (unitless)} $total-columns ($grid-columns)
- *   - Number of columns to use in the new grid context. Can be set as a shorthand in the first parameter.
- *
- * @example scss - Usage
- *   .responsive-element {
- *      @include media(769px) {
- *        @include span-columns(6);
- *      }
- *   }
- *
- *  .new-context-element {
- *    @include media(min-width 320px max-width 480px, 6) {
- *      @include span-columns(6);
- *    }
- *  }
- *
- * @example css - CSS Output
- *  @media screen and (min-width: 769px) {
- *    .responsive-element {
- *      display: block;
- *      float: left;
- *      margin-right: 2.35765%;
- *      width: 48.82117%;
- *    }
- *
- *    .responsive-element:last-child {
- *      margin-right: 0;
- *    }
- *  }
- *
- *  @media screen and (min-width: 320px) and (max-width: 480px) {
- *    .new-context-element {
- *      display: block;
- *      float: left;
- *      margin-right: 4.82916%;
- *      width: 100%;
- *    }
- *
- *    .new-context-element:last-child {
- *      margin-right: 0;
- *    }
- *  }
- */
-/**
- * Resets the active display property to `block`. Particularly useful when changing the display property in a single row.
- *
- * @example scss - Usage
- *   .element {
- *     @include row(table);
- *     // Context changed to table display
- *   }
- *
- *   @include reset-display;
- *   // Context is reset to block display
- */
-/**
- * Resets the active layout direction to the default value set in `$default-layout-direction`. Particularly useful when changing the layout direction in a single row.
- *
- * @example scss - Usage
- *   .element {
- *     @include row($direction: RTL);
- *     // Context changed to right-to-left
- *   }
- *
- *   @include reset-layout-direction;
- *   // Context is reset to left-to-right
- */
-/**
- * Resets both the active layout direction and the active display property.
- *
- * @example scss - Usage
- *   .element {
- *     @include row(table, RTL);
- *     // Context changed to table table and right-to-left
- *   }
- *
- *   @include reset-all;
- *   // Context is reset to block display and left-to-right
- */
-/**
- * Changes the display property used by other mixins called in the code block argument.
- *
- * @param {String} $display (block)
- *   Display value to be used within the block. Can be `table` or `block`.
- *
- * @example scss
- *   @include display(table) {
- *    .display-table {
- *      @include span-columns(6);
- *     }
- *   }
- *
- * @example css
- *   .display-table {
- *      display: table-cell;
- *      ...
- *   }
- */
-/**
- * Changes the direction property used by other mixins called in the code block argument.
- *
- * @param {String} $direction (left-to-right)
- *   Layout direction to be used within the block. Can be `left-to-right` or `right-to-left`.
- *
- * @example scss - Usage
- *   @include direction(right-to-left) {
- *    .right-to-left-block {
- *      @include span-columns(6);
- *     }
- *   }
- *
- * @example css - CSS Output
- *   .right-to-left-block {
- *     float: right;
- *      ...
- *   }
- */
 /*--------------------------------------------------------------
 1.0 Reset
 --------------------------------------------------------------*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline; }
-
-html {
-  line-height: 1; }
-
-ol, ul {
-  list-style: none; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle; }
-
-q, blockquote {
-  quotes: none; }
-  q:before, q:after, blockquote:before, blockquote:after {
-    content: "";
-    content: none; }
-
-a img {
-  border: none; }
-
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
-  display: block; }
-
 /* Bitters 0.10.0
  * http://bitters.bourbon.io
  * Copyright 2013-2014 thoughtbot, inc.
  * MIT License */
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/extends/_button.scss */
 button,
 input[type="submit"] {
   -webkit-font-smoothing: antialiased;
@@ -542,18 +61,20 @@ input[type="submit"] {
   line-height: 1;
   padding: 0.75em 1em;
   text-decoration: none; }
+  /* line 13, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/extends/_button.scss */
   button:hover,
   input[type="submit"]:hover {
     background-color: #906700;
     color: white; }
+  /* line 18, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/extends/_button.scss */
   button:disabled,
   input[type="submit"]:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
 
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 body {
   -webkit-font-feature-settings: "kern", "liga", "frac", "pnum";
-  -moz-font-feature-settings: "kern", "liga", "frac", "pnum";
   -ms-font-feature-settings: "kern", "liga", "frac", "pnum";
   font-feature-settings: "kern", "liga", "frac", "pnum";
   -webkit-font-smoothing: antialiased;
@@ -563,6 +84,7 @@ body {
   font-size: 1em;
   line-height: 1.5; }
 
+/* line 11, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 h1,
 h2,
 h3,
@@ -573,38 +95,49 @@ h6 {
   line-height: 1.25;
   margin: 0; }
 
+/* line 22, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 h1 {
   font-size: 2.25em; }
 
+/* line 26, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 h2 {
   font-size: 2em; }
 
+/* line 30, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 h3 {
   font-size: 1.75em; }
 
+/* line 34, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 h4 {
   font-size: 1.5em; }
 
+/* line 38, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 h5 {
   font-size: 1.25em; }
 
+/* line 42, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 h6 {
   font-size: 1em; }
 
+/* line 46, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 p {
   margin: 0 0 0.75em; }
 
+/* line 50, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 a {
   -webkit-transition: color 0.1s linear;
   transition: color 0.1s linear;
   color: #433000;
   text-decoration: none; }
+  /* line 55, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
   a:hover {
     color: #906700; }
+  /* line 59, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
   a:active, a:focus {
     color: #906700;
     outline: none; }
 
+/* line 65, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 hr {
   border-bottom: 1px solid #DDD;
   border-left: none;
@@ -612,36 +145,44 @@ hr {
   border-top: none;
   margin: 1.5em 0; }
 
+/* line 73, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 img,
 picture {
   margin: 0;
   max-width: 100%; }
 
+/* line 79, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 blockquote {
   border-left: 2px solid #DDD;
   color: #906700;
   margin: 1.5em 0;
   padding-left: 0.75em; }
 
+/* line 86, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 cite {
   color: #c38b00;
   font-style: italic; }
+  /* line 90, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
   cite:before {
     content: "\2014 \00A0"; }
 
+/* line 94, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 strong, b {
   font-weight: bold;
   font-weight: 700; }
 
+/* line 95, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
 em, i {
   font-style: italic; }
 
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 fieldset {
   background: #f7f7f7;
   border: 1px solid #DDD;
   margin: 0 0 0.75em 0;
   padding: 1.5em; }
 
+/* line 8, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 input,
 label,
 select {
@@ -649,16 +190,20 @@ select {
   font-family: "freight-text-pro";
   font-size: 1em; }
 
+/* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 label {
   font-weight: bold;
   margin-bottom: 0.375em; }
+  /* line 20, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
   label.required:after {
     content: "*"; }
+  /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
   label abbr {
     display: none; }
 
+/* line 29, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 textarea,
-input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"],
+input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], input:not([type]), textarea,
 select[multiple=multiple] {
   box-sizing: border-box;
   -webkit-transition: border-color;
@@ -672,20 +217,24 @@ select[multiple=multiple] {
   margin-bottom: 0.75em;
   padding: 0.5em 0.5em;
   width: 100%; }
+  /* line 42, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
   textarea:hover,
-  input[type="email"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="url"]:hover, input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="month"]:hover, input[type="time"]:hover, input[type="week"]:hover,
+  input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="email"]:hover, input[type="month"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="time"]:hover, input[type="url"]:hover, input[type="week"]:hover, input:not([type]):hover, textarea:hover,
   select[multiple=multiple]:hover {
     border-color: #c4c4c4; }
+  /* line 46, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
   textarea:focus,
-  input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus,
+  input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="email"]:focus, input[type="month"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="week"]:focus, input:not([type]):focus, textarea:focus,
   select[multiple=multiple]:focus {
     border-color: #dc9e00;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(195, 139, 0, 0.7);
     outline: none; }
 
+/* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 textarea {
   resize: vertical; }
 
+/* line 57, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 input[type="search"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -693,23 +242,26 @@ input[type="search"] {
   -o-appearance: none;
   appearance: none; }
 
+/* line 61, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 input[type="checkbox"],
 input[type="radio"] {
   display: inline;
   margin-right: 0.375em; }
 
+/* line 67, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 input[type="file"] {
   padding-bottom: 0.75em;
   width: 100%; }
 
+/* line 72, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
 select {
   margin-bottom: 1.5em;
   max-width: 100%;
   width: auto; }
 
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_tables.scss */
 table {
   -webkit-font-feature-settings: "kern", "liga", "tnum";
-  -moz-font-feature-settings: "kern", "liga", "tnum";
   -ms-font-feature-settings: "kern", "liga", "tnum";
   font-feature-settings: "kern", "liga", "tnum";
   border-collapse: collapse;
@@ -717,34 +269,43 @@ table {
   table-layout: fixed;
   width: 100%; }
 
+/* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_tables.scss */
 th {
   border-bottom: 1px solid #b7b7b7;
   font-weight: bold;
   padding: 0.75em 0;
   text-align: left; }
 
+/* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_tables.scss */
 td {
   border-bottom: 1px solid #DDD;
   padding: 0.75em 0; }
 
+/* line 21, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_tables.scss */
 tr,
 td,
 th {
   vertical-align: middle; }
 
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_lists.scss */
 ul,
 ol {
   margin: 0;
   padding: 0;
   list-style-type: none; }
+
+/* line 20, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_lists.scss */
 dl {
   margin-bottom: 0.75em; }
+  /* line 23, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_lists.scss */
   dl dt {
     font-weight: bold;
     margin-top: 0.75em; }
+  /* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_lists.scss */
   dl dd {
     margin: 0; }
 
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_buttons.scss */
 button,
 input[type="submit"] {
   -webkit-appearance: none;
@@ -764,31 +325,223 @@ input[type="submit"] {
 /*--------------------------------------------------------------
 2.0 Typography
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+body {
+  -webkit-font-feature-settings: "kern", "liga", "frac", "pnum";
+  -ms-font-feature-settings: "kern", "liga", "frac", "pnum";
+  font-feature-settings: "kern", "liga", "frac", "pnum";
+  -webkit-font-smoothing: antialiased;
+  background-color: #f7f2db;
+  color: #433000;
+  font-family: "freight-text-pro";
+  font-size: 1em;
+  line-height: 1.5; }
+
+/* line 11, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "freight-text-pro";
+  line-height: 1.25;
+  margin: 0; }
+
+/* line 22, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+h1 {
+  font-size: 2.25em; }
+
+/* line 26, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+h2 {
+  font-size: 2em; }
+
+/* line 30, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+h3 {
+  font-size: 1.75em; }
+
+/* line 34, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+h4 {
+  font-size: 1.5em; }
+
+/* line 38, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+h5 {
+  font-size: 1.25em; }
+
+/* line 42, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+h6 {
+  font-size: 1em; }
+
+/* line 46, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+p {
+  margin: 0 0 0.75em; }
+
+/* line 50, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+a {
+  -webkit-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  color: #433000;
+  text-decoration: none; }
+  /* line 55, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+  a:hover {
+    color: #906700; }
+  /* line 59, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+  a:active, a:focus {
+    color: #906700;
+    outline: none; }
+
+/* line 65, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+hr {
+  border-bottom: 1px solid #DDD;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: 1.5em 0; }
+
+/* line 73, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+img,
+picture {
+  margin: 0;
+  max-width: 100%; }
+
+/* line 79, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+blockquote {
+  border-left: 2px solid #DDD;
+  color: #906700;
+  margin: 1.5em 0;
+  padding-left: 0.75em; }
+
+/* line 86, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+cite {
+  color: #c38b00;
+  font-style: italic; }
+  /* line 90, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+  cite:before {
+    content: "\2014 \00A0"; }
+
+/* line 94, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+strong, b {
+  font-weight: bold;
+  font-weight: 700; }
+
+/* line 95, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_typography.scss */
+em, i {
+  font-style: italic; }
+
 /*--------------------------------------------------------------
 4.0 Forms
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+fieldset {
+  background: #f7f7f7;
+  border: 1px solid #DDD;
+  margin: 0 0 0.75em 0;
+  padding: 1.5em; }
+
+/* line 8, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+input,
+label,
+select {
+  display: block;
+  font-family: "freight-text-pro";
+  font-size: 1em; }
+
+/* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+label {
+  font-weight: bold;
+  margin-bottom: 0.375em; }
+  /* line 20, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+  label.required:after {
+    content: "*"; }
+  /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+  label abbr {
+    display: none; }
+
+/* line 29, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+textarea,
+input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], input:not([type]), textarea,
+select[multiple=multiple] {
+  box-sizing: border-box;
+  -webkit-transition: border-color;
+  transition: border-color;
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #DDD;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-family: "freight-text-pro";
+  font-size: 1em;
+  margin-bottom: 0.75em;
+  padding: 0.5em 0.5em;
+  width: 100%; }
+  /* line 42, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+  textarea:hover,
+  input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="email"]:hover, input[type="month"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="time"]:hover, input[type="url"]:hover, input[type="week"]:hover, input:not([type]):hover, textarea:hover,
+  select[multiple=multiple]:hover {
+    border-color: #c4c4c4; }
+  /* line 46, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+  textarea:focus,
+  input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="email"]:focus, input[type="month"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="week"]:focus, input:not([type]):focus, textarea:focus,
+  select[multiple=multiple]:focus {
+    border-color: #dc9e00;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(195, 139, 0, 0.7);
+    outline: none; }
+
+/* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+textarea {
+  resize: vertical; }
+
+/* line 57, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none; }
+
+/* line 61, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline;
+  margin-right: 0.375em; }
+
+/* line 67, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+input[type="file"] {
+  padding-bottom: 0.75em;
+  width: 100%; }
+
+/* line 72, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/base/_forms.scss */
+select {
+  margin-bottom: 1.5em;
+  max-width: 100%;
+  width: auto; }
+
 /*--------------------------------------------------------------
 5.0 Navigation
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
 5.1 Links
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_links.scss */
 a {
   color: #433000;
   font-weight: 700; }
+  /* line 5, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_links.scss */
   a:visited {
     color: #433000; }
+  /* line 8, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_links.scss */
   a:hover, a:focus, a:active {
     color: #906700; }
 
 /*--------------------------------------------------------------
 5.2 Menus
 --------------------------------------------------------------*/
+/* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
 .main-navigation ul {
   list-style: none;
   margin: 0;
   padding-left: 0;
   font-family: "freight-sans-pro"; }
+  /* line 10, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
   .main-navigation ul ul {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
     float: left;
@@ -796,50 +549,65 @@ a {
     top: 1.5em;
     left: -999em;
     z-index: 99999; }
+    /* line 18, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
     .main-navigation ul ul ul {
       left: -999em;
       top: 0; }
+    /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
     .main-navigation ul ul li:hover > ul {
       left: 100%; }
+    /* line 29, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
     .main-navigation ul ul a {
       width: 200px;
       font-weight: 700; }
+  /* line 41, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
   .main-navigation ul li:hover > ul {
     left: auto; }
+
+/* line 45, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
 .main-navigation li {
   float: left;
   position: relative;
   margin-right: 1.5em;
   font-size: 1.15em; }
+  /* line 51, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
   .main-navigation li:last-child {
     margin-right: 0; }
+
+/* line 56, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
 .main-navigation a {
   display: block;
   text-decoration: none; }
 
 /* Small menu */
+/* line 68, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
 .menu-toggle {
   display: none; }
 
 @media screen and (max-width: 600px) {
+  /* line 73, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
   .menu-toggle,
   .main-navigation.toggled .nav-menu {
     display: block; }
-
+  /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
   .main-navigation ul {
     display: none; } }
+
+/* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
 .site-main .comment-navigation,
 .site-main .paging-navigation,
 .site-main .post-navigation {
   margin: 0 0 1.5em;
   overflow: hidden; }
 
+/* line 90, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
 .comment-navigation .nav-previous,
 .paging-navigation .nav-previous,
 .post-navigation .nav-previous {
   float: left;
   width: 50%; }
 
+/* line 97, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/navigation/_menus.scss */
 .comment-navigation .nav-next,
 .paging-navigation .nav-next,
 .post-navigation .nav-next {
@@ -851,12 +619,14 @@ a {
 6.0 Accessibility
 --------------------------------------------------------------*/
 /* Text meant only for screen readers */
+/* line 2, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_accessibility.scss */
 .screen-reader-text {
   clip: rect(1px, 1px, 1px, 1px);
   position: absolute !important;
   height: 1px;
   width: 1px;
   overflow: hidden; }
+  /* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_accessibility.scss */
   .screen-reader-text:hover, .screen-reader-text:active, .screen-reader-text:focus {
     background-color: #f7f2db;
     border-radius: 3px;
@@ -879,312 +649,403 @@ a {
 /*--------------------------------------------------------------
 7.0 Alignments
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
 .alignleft {
   display: inline;
   float: left;
   margin-right: 1.5em; }
 
+/* line 7, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
 .alignright {
   display: inline;
   float: right;
   margin-left: 1.5em; }
 
+/* line 13, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
 .aligncenter {
   display: block;
   margin: 0 auto; }
 
-#main {
+/* line 17, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+#content .wrap {
   content: "";
   display: table;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   width: 100%; }
-  #main .one-wide {
+  /* line 21, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+  #content .wrap .one-wide {
     background: blue;
     display: block;
     height: 200px; }
     @media screen and (max-width: 24.9375em) {
-      #main .one-wide {
+      /* line 21, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-wide {
         float: left;
         display: block;
-        margin-right: 14.28571%;
+        margin-right: 14.2857142857%;
         width: 100%; }
-        #main .one-wide:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-wide:last-child {
           margin-right: 0; }
-        #main .one-wide:nth-child(1n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(1n) {
           margin-right: 0; }
-        #main .one-wide:nth-child(1n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(1n+1) {
           clear: left; } }
     @media screen and (min-width: 25em) and (max-width: 43.75em) {
-      #main .one-wide {
+      /* line 21, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-wide {
         float: left;
         display: block;
-        margin-right: 6.66667%;
+        margin-right: 6.6666666667%;
         width: 20%; }
-        #main .one-wide:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-wide:last-child {
           margin-right: 0; }
-        #main .one-wide:nth-child(4n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(4n) {
           margin-right: 0; }
-        #main .one-wide:nth-child(4n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(4n+1) {
           clear: left; } }
     @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
-      #main .one-wide {
+      /* line 21, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-wide {
         float: left;
         display: block;
-        margin-right: 3.22581%;
-        width: 13.97419%; }
-        #main .one-wide:last-child {
+        margin-right: 3.2258064516%;
+        width: 13.9741935484%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-wide:last-child {
           margin-right: 0; }
-        #main .one-wide:nth-child(6n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(6n) {
           margin-right: 0; }
-        #main .one-wide:nth-child(6n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(6n+1) {
           clear: left; } }
     @media screen and (min-width: 68.75em) {
-      #main .one-wide {
+      /* line 21, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-wide {
         float: left;
         display: block;
-        margin-right: 2.12766%;
-        width: 6.38298%; }
-        #main .one-wide:last-child {
+        margin-right: 2.1276595745%;
+        width: 6.3829787234%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-wide:last-child {
           margin-right: 0; }
-        #main .one-wide:nth-child(12n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(12n) {
           margin-right: 0; }
-        #main .one-wide:nth-child(12n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .one-wide:nth-child(12n+1) {
           clear: left; } }
-  #main .two-wide {
+  /* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+  #content .wrap .two-wide {
     background: red;
     display: block;
     height: 200px; }
     @media screen and (max-width: 24.9375em) {
-      #main .two-wide {
+      /* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-wide {
         float: left;
         display: block;
-        margin-right: 14.28571%;
+        margin-right: 14.2857142857%;
         width: 100%; }
-        #main .two-wide:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-wide:last-child {
           margin-right: 0; }
-        #main .two-wide:nth-child(1n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(1n) {
           margin-right: 0; }
-        #main .two-wide:nth-child(1n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(1n+1) {
           clear: left; } }
     @media screen and (min-width: 25em) and (max-width: 43.75em) {
-      #main .two-wide {
+      /* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-wide {
         float: left;
         display: block;
-        margin-right: 6.66667%;
+        margin-right: 6.6666666667%;
         width: 100%; }
-        #main .two-wide:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-wide:last-child {
           margin-right: 0; }
-        #main .two-wide:nth-child(1n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(1n) {
           margin-right: 0; }
-        #main .two-wide:nth-child(1n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(1n+1) {
           clear: left; } }
     @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
-      #main .two-wide {
+      /* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-wide {
         float: left;
         display: block;
-        margin-right: 3.22581%;
-        width: 48.3871%; }
-        #main .two-wide:last-child {
+        margin-right: 3.2258064516%;
+        width: 48.3870967742%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-wide:last-child {
           margin-right: 0; }
-        #main .two-wide:nth-child(2n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(2n) {
           margin-right: 0; }
-        #main .two-wide:nth-child(2n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(2n+1) {
           clear: left; } }
     @media screen and (min-width: 68.75em) {
-      #main .two-wide {
+      /* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-wide {
         float: left;
         display: block;
-        margin-right: 2.12766%;
-        width: 48.93617%; }
-        #main .two-wide:last-child {
+        margin-right: 2.1276595745%;
+        width: 48.9361702128%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-wide:last-child {
           margin-right: 0; }
-        #main .two-wide:nth-child(2n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(2n) {
           margin-right: 0; }
-        #main .two-wide:nth-child(2n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .two-wide:nth-child(2n+1) {
           clear: left; } }
-  #main .three-wide {
+  /* line 35, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+  #content .wrap .three-wide {
     background: blue;
     display: block;
     height: 200px; }
     @media screen and (max-width: 24.9375em) {
-      #main .three-wide {
+      /* line 35, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .three-wide {
         float: left;
         display: block;
-        margin-right: 14.28571%;
+        margin-right: 14.2857142857%;
         width: 100%; }
-        #main .three-wide:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .three-wide:last-child {
           margin-right: 0; }
-        #main .three-wide:nth-child(1n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(1n) {
           margin-right: 0; }
-        #main .three-wide:nth-child(1n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(1n+1) {
           clear: left; } }
     @media screen and (min-width: 25em) and (max-width: 43.75em) {
-      #main .three-wide {
+      /* line 35, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .three-wide {
         float: left;
         display: block;
-        margin-right: 6.66667%;
-        width: 46.66667%; }
-        #main .three-wide:last-child {
+        margin-right: 6.6666666667%;
+        width: 46.6666666667%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .three-wide:last-child {
           margin-right: 0; }
-        #main .three-wide:nth-child(2n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(2n) {
           margin-right: 0; }
-        #main .three-wide:nth-child(2n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(2n+1) {
           clear: left; } }
     @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
-      #main .three-wide {
+      /* line 35, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .three-wide {
         float: left;
         display: block;
-        margin-right: 3.22581%;
-        width: 22.58065%; }
-        #main .three-wide:last-child {
+        margin-right: 3.2258064516%;
+        width: 22.5806451613%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .three-wide:last-child {
           margin-right: 0; }
-        #main .three-wide:nth-child(4n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(4n) {
           margin-right: 0; }
-        #main .three-wide:nth-child(4n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(4n+1) {
           clear: left; } }
     @media screen and (min-width: 68.75em) {
-      #main .three-wide {
+      /* line 35, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .three-wide {
         float: left;
         display: block;
-        margin-right: 2.12766%;
-        width: 23.40426%; }
-        #main .three-wide:last-child {
+        margin-right: 2.1276595745%;
+        width: 23.4042553191%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .three-wide:last-child {
           margin-right: 0; }
-        #main .three-wide:nth-child(4n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(4n) {
           margin-right: 0; }
-        #main .three-wide:nth-child(4n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .three-wide:nth-child(4n+1) {
           clear: left; } }
-  #main .four-wide {
+  /* line 41, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+  #content .wrap .four-wide {
     background: green;
     display: block;
     height: 200px; }
     @media screen and (max-width: 24.9375em) {
-      #main .four-wide {
+      /* line 41, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .four-wide {
         float: left;
         display: block;
-        margin-right: 14.28571%;
+        margin-right: 14.2857142857%;
         width: 100%; }
-        #main .four-wide:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .four-wide:last-child {
           margin-right: 0; }
-        #main .four-wide:nth-child(1n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(1n) {
           margin-right: 0; }
-        #main .four-wide:nth-child(1n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(1n+1) {
           clear: left; } }
     @media screen and (min-width: 25em) and (max-width: 43.75em) {
-      #main .four-wide {
+      /* line 41, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .four-wide {
         float: left;
         display: block;
-        margin-right: 6.66667%;
+        margin-right: 6.6666666667%;
         width: 100%; }
-        #main .four-wide:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .four-wide:last-child {
           margin-right: 0; }
-        #main .four-wide:nth-child(1n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(1n) {
           margin-right: 0; }
-        #main .four-wide:nth-child(1n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(1n+1) {
           clear: left; } }
     @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
-      #main .four-wide {
+      /* line 41, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .four-wide {
         float: left;
         display: block;
-        margin-right: 3.22581%;
-        width: 31.09677%; }
-        #main .four-wide:last-child {
+        margin-right: 3.2258064516%;
+        width: 31.0967741935%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .four-wide:last-child {
           margin-right: 0; }
-        #main .four-wide:nth-child(3n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(3n) {
           margin-right: 0; }
-        #main .four-wide:nth-child(3n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(3n+1) {
           clear: left; } }
     @media screen and (min-width: 68.75em) {
-      #main .four-wide {
+      /* line 41, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .four-wide {
         float: left;
         display: block;
-        margin-right: 2.12766%;
-        width: 31.91489%; }
-        #main .four-wide:last-child {
+        margin-right: 2.1276595745%;
+        width: 31.914893617%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .four-wide:last-child {
           margin-right: 0; }
-        #main .four-wide:nth-child(3n) {
+        /* line 78, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(3n) {
           margin-right: 0; }
-        #main .four-wide:nth-child(3n+1) {
+        /* line 83, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_omega.scss */
+        #content .wrap .four-wide:nth-child(3n+1) {
           clear: left; } }
-  #main .two-thirds {
+  /* line 47, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+  #content .wrap .two-thirds {
     background: pink;
     display: block;
     height: 200px; }
     @media screen and (max-width: 24.9375em) {
-      #main .two-thirds {
+      /* line 47, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-thirds {
         float: left;
         display: block;
-        margin-right: 14.28571%;
+        margin-right: 14.2857142857%;
         width: 100%; }
-        #main .two-thirds:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-thirds:last-child {
           margin-right: 0; } }
     @media screen and (min-width: 25em) and (max-width: 43.75em) {
-      #main .two-thirds {
+      /* line 47, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-thirds {
         float: left;
         display: block;
-        margin-right: 6.66667%;
+        margin-right: 6.6666666667%;
         width: 100%; }
-        #main .two-thirds:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-thirds:last-child {
           margin-right: 0; } }
     @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
-      #main .two-thirds {
+      /* line 47, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-thirds {
         float: left;
         display: block;
-        margin-right: 3.22581%;
-        width: 65.54839%; }
-        #main .two-thirds:last-child {
+        margin-right: 3.2258064516%;
+        width: 65.5483870968%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-thirds:last-child {
           margin-right: 0; } }
     @media screen and (min-width: 68.75em) {
-      #main .two-thirds {
+      /* line 47, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .two-thirds {
         float: left;
         display: block;
-        margin-right: 2.12766%;
-        width: 65.95745%; }
-        #main .two-thirds:last-child {
+        margin-right: 2.1276595745%;
+        width: 65.9574468085%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .two-thirds:last-child {
           margin-right: 0; } }
-  #main .one-third {
+  /* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+  #content .wrap .one-third {
     background: olive;
     display: block;
     height: 200px;
     margin-right: 0; }
     @media screen and (max-width: 24.9375em) {
-      #main .one-third {
+      /* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-third {
         float: left;
         display: block;
-        margin-right: 14.28571%;
+        margin-right: 14.2857142857%;
         width: 100%; }
-        #main .one-third:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-third:last-child {
           margin-right: 0; } }
     @media screen and (min-width: 25em) and (max-width: 43.75em) {
-      #main .one-third {
+      /* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-third {
         float: left;
         display: block;
-        margin-right: 6.66667%;
+        margin-right: 6.6666666667%;
         width: 100%; }
-        #main .one-third:last-child {
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-third:last-child {
           margin-right: 0; } }
     @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
-      #main .one-third {
+      /* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-third {
         float: left;
         display: block;
-        margin-right: 3.22581%;
-        width: 31.09677%; }
-        #main .one-third:last-child {
+        margin-right: 3.2258064516%;
+        width: 31.0967741935%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-third:last-child {
           margin-right: 0; } }
     @media screen and (min-width: 68.75em) {
-      #main .one-third {
+      /* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_alignments.scss */
+      #content .wrap .one-third {
         float: left;
         display: block;
-        margin-right: 2.12766%;
-        width: 31.91489%; }
-        #main .one-third:last-child {
+        margin-right: 2.1276595745%;
+        width: 31.914893617%; }
+        /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
+        #content .wrap .one-third:last-child {
           margin-right: 0; } }
 
 /*--------------------------------------------------------------
 8.0 Clearings
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_clearings.scss */
 .clear:before,
 .clear:after,
 .entry-content:before,
@@ -1200,6 +1061,7 @@ a {
   content: "";
   display: table; }
 
+/* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_clearings.scss */
 .clear:after,
 .entry-content:after,
 .comment-content:after,
@@ -1211,13 +1073,16 @@ a {
 /*--------------------------------------------------------------
 9.0 Widgets
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/secondary/_widgets.scss */
 .widget {
   margin: 0 0 1.5em;
   /* Make sure select elements fit in widgets */ }
+  /* line 5, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/secondary/_widgets.scss */
   .widget select {
     max-width: 100%; }
 
 /* Search widget */
+/* line 11, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/secondary/_widgets.scss */
 .widget_search .search-submit {
   display: none; }
 
@@ -1225,6 +1090,7 @@ a {
 10.0 Content
 --------------------------------------------------------------*/
 /* Scss Document */
+/* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
 header#masthead {
   width: 100%;
   background-color: #fffdf6;
@@ -1232,6 +1098,7 @@ header#masthead {
   height: 270px;
   z-index: 9999;
   top: 0; }
+  /* line 11, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
   header#masthead .wrap {
     content: "";
     display: table;
@@ -1239,40 +1106,50 @@ header#masthead {
     margin-left: auto;
     margin-right: auto;
     width: 100%; }
+    /* line 15, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
     header#masthead .wrap .site-branding {
       width: 100%;
       text-align: center; }
+      /* line 19, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
       header#masthead .wrap .site-branding h1.site-title a {
         font-weight: 700;
         display: inline-block;
         padding: 2% 3% .5%;
         border-bottom: 1px solid cyan;
         width: 420px; }
+      /* line 26, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
       header#masthead .wrap .site-branding h2.site-description {
         font-family: "freight-sans-pro";
         font-size: 1.3em;
         font-weight: 100;
         line-height: 2.2em; }
+    /* line 33, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
     header#masthead .wrap nav#site-navigation {
-      @fill-parent;
+      width: 100%;
       margin-top: -40px; }
+      /* line 37, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
       header#masthead .wrap nav#site-navigation .menu-main-navigation-container {
         float: right; }
+        /* line 40, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
         header#masthead .wrap nav#site-navigation .menu-main-navigation-container ul {
           width: 100%; }
+      /* line 44, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
       header#masthead .wrap nav#site-navigation .menu-main-nav-right-container {
         float: right; }
 
+/* line 50, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_header.scss */
 body.admin-bar header#masthead {
   top: 28px; }
 
 /* Scss Document */
+/* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_main.scss */
 div#content {
   z-index: 800;
   position: relative;
   padding-top: 20px; }
 
 /* Scss Document */
+/* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_footer.scss */
 footer#colophon {
   content: "";
   display: table;
@@ -1285,15 +1162,18 @@ footer#colophon {
   text-align: center;
   width: 100%;
   font-family: "freight-sans-pro"; }
+  /* line 13, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_footer.scss */
   footer#colophon .site-info {
     width: 100%; }
 
+/* line 2, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
 .home section {
   content: "";
   display: table;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto; }
+  /* line 5, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
   .home section#hero {
     width: 100%;
     height: 350px;
@@ -1305,19 +1185,22 @@ footer#colophon {
     font-weight: 700;
     border-top: 7px solid #433000;
     margin-top: 8px; }
+    /* line 17, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#hero h1 {
       font-family: "freight-sans-pro";
       margin-top: 150px;
       line-height: 100%; }
+  /* line 23, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
   .home section#intro {
     width: 100%;
     overflow: hidden;
     background: #00aab5; }
+    /* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#intro .intro-text {
       float: left;
       display: block;
-      margin-right: 2.12766%;
-      width: 65.95745%;
+      margin-right: 2.1276595745%;
+      width: 65.9574468085%;
       float: left;
       color: #FFF;
       text-align: center;
@@ -1325,32 +1208,41 @@ footer#colophon {
       margin: 0 auto;
       font-family: "freight-sans-pro";
       font-size: 1.4em; }
+      /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
       .home section#intro .intro-text:last-child {
         margin-right: 0; }
+    /* line 38, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#intro .video {
       float: left;
       display: block;
-      margin-right: 2.12766%;
-      width: 31.91489%;
+      margin-right: 2.1276595745%;
+      width: 31.914893617%;
       float: right; }
+      /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
       .home section#intro .video:last-child {
         margin-right: 0; }
+      /* line 42, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
       .home section#intro .video a {
         display: block;
         line-height: 0; }
+      /* line 47, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
       .home section#intro .video img {
         width: 100%;
         height: auto; }
+  /* line 53, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
   .home section#section-a {
     width: 100%;
     text-align: center; }
+    /* line 57, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#section-a h3 {
       margin: 1em 0;
       font-size: 2.5em;
       font-weight: 700; }
+    /* line 63, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#section-a .practitioner {
       float: left;
       width: 33%; }
+      /* line 67, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
       .home section#section-a .practitioner .wrap {
         overflow: hidden;
         height: 200px;
@@ -1358,6 +1250,7 @@ footer#colophon {
         border-radius: 50%;
         margin: 0 auto;
         border: 2px solid #433000; }
+    /* line 76, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#section-a p.highlight {
       font-size: 1.75em;
       margin-top: 3em;
@@ -1368,6 +1261,7 @@ footer#colophon {
       clear: both;
       position: relative;
       overflow: hidden; }
+  /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
   .home section#section-b {
     width: 100%;
     text-align: center;
@@ -1386,27 +1280,27 @@ footer#colophon {
     /* IE6-9 */
     padding-bottom: 3em;
     font-family: "freight-sans-pro"; }
+    /* line 103, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#section-b .two-col {
       -moz-column-count: 2;
       -moz-column-gap: 20px;
       -webkit-column-count: 2;
       -webkit-column-gap: 20px;
-      -webkit-column-count: 2;
-         -moz-column-count: 2;
-              column-count: 2;
-      -webkit-column-gap: 20px;
-         -moz-column-gap: 20px;
-              column-gap: 20px; }
+      column-count: 2;
+      column-gap: 20px; }
+      /* line 111, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
       .home section#section-b .two-col ul li {
         font-size: 1.5em;
         -webkit-column-break-inside: avoid;
         page-break-inside: avoid;
         break-inside: avoid; }
+    /* line 119, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#section-b h3 {
       margin: 1em 0;
       font-size: 2.5em;
       font-family: "freight-text-pro";
       font-weight: 700; }
+  /* line 126, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
   .home section#section-c {
     width: 100%;
     text-align: center;
@@ -1425,639 +1319,935 @@ footer#colophon {
     /* IE6-9 */
     padding-bottom: 3em;
     font-family: "freight-sans-pro"; }
+    /* line 140, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#section-c .two-col {
       -moz-column-count: 2;
       -moz-column-gap: 20px;
       -webkit-column-count: 2;
       -webkit-column-gap: 20px;
-      -webkit-column-count: 2;
-         -moz-column-count: 2;
-              column-count: 2;
-      -webkit-column-gap: 20px;
-         -moz-column-gap: 20px;
-              column-gap: 20px; }
+      column-count: 2;
+      column-gap: 20px; }
+      /* line 148, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
       .home section#section-c .two-col ul li {
         font-size: 1.5em;
         -webkit-column-break-inside: avoid;
         page-break-inside: avoid;
         break-inside: avoid; }
+    /* line 156, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
     .home section#section-c h3 {
       margin: 1em 0;
       font-size: 2.5em;
       font-family: "freight-text-pro";
       font-weight: 700; }
+  /* line 163, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/home.scss */
   .home section#section-d {
     padding: 3em 0;
     font-size: 1.35em; }
 
 /*  Two Columns 50-50  */
 @media screen and (max-width: 24.9375em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section0, .fifty-fifty .sub-section0 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section0:last-child, .fifty-fifty .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section0, .fifty-fifty .sub-section0 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section0:last-child, .fifty-fifty .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section0, .fifty-fifty .sub-section0 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 48.3871%; }
+    margin-right: 3.2258064516%;
+    width: 48.3870967742%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section0:last-child, .fifty-fifty .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section0, .fifty-fifty .sub-section0 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 48.93617%; }
+    margin-right: 2.1276595745%;
+    width: 48.9361702128%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section0:last-child, .fifty-fifty .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section0, .fifty-fifty .sub-section0 {
     margin-right: 0; } }
+
+/* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .two-column-5050 .sub-section0.boxed, .fifty-fifty .sub-section0.boxed {
   display: table; }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 13, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section1, .fifty-fifty .sub-section1 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section1:last-child, .fifty-fifty .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 13, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section1, .fifty-fifty .sub-section1 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section1:last-child, .fifty-fifty .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 13, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section1, .fifty-fifty .sub-section1 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 48.3871%; }
+    margin-right: 3.2258064516%;
+    width: 48.3870967742%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section1:last-child, .fifty-fifty .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 13, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-5050 .sub-section1, .fifty-fifty .sub-section1 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 48.93617%; }
+    margin-right: 2.1276595745%;
+    width: 48.9361702128%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-5050 .sub-section1:last-child, .fifty-fifty .sub-section1:last-child {
       margin-right: 0; } }
+
+/* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .two-column-5050 .sub-section1.boxed, .fifty-fifty .sub-section1.boxed {
   display: table; }
 
 /*  Two Columns 33-67  */
 @media screen and (max-width: 24.9375em) {
+  /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section0 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section0 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section0 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 31.09677%; }
+    margin-right: 3.2258064516%;
+    width: 31.0967741935%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section0 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 31.91489%; }
+    margin-right: 2.1276595745%;
+    width: 31.914893617%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section0 {
     margin-right: 0; } }
+
+/* line 29, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .onethird-twothirds .sub-section0.boxed {
   display: table; }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 33, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section1 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 33, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section1 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 33, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section1 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 65.54839%; }
+    margin-right: 3.2258064516%;
+    width: 65.5483870968%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 33, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section1 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 65.95745%; }
+    margin-right: 2.1276595745%;
+    width: 65.9574468085%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onethird-twothirds .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 33, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onethird-twothirds .sub-section1 {
     margin-right: 0; } }
 
 /*  Two Columns 67-33  */
 @media screen and (max-width: 24.9375em) {
+  /* line 43, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section0, .twothirds-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section0:last-child, .twothirds-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 43, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section0, .twothirds-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section0:last-child, .twothirds-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 43, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section0, .twothirds-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 65.54839%; }
+    margin-right: 3.2258064516%;
+    width: 65.5483870968%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section0:last-child, .twothirds-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 43, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section0, .twothirds-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 65.95745%; }
+    margin-right: 2.1276595745%;
+    width: 65.9574468085%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section0:last-child, .twothirds-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 43, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section0, .twothirds-onethird .sub-section0 {
     margin-right: 0; } }
+
+/* line 48, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .two-column-6733 .sub-section0.boxed, .twothirds-onethird .sub-section0.boxed {
   display: table; }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 52, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section1, .twothirds-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section1:last-child, .twothirds-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 52, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section1, .twothirds-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section1:last-child, .twothirds-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 52, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section1, .twothirds-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 31.09677%; }
+    margin-right: 3.2258064516%;
+    width: 31.0967741935%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section1:last-child, .twothirds-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 52, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-6733 .sub-section1, .twothirds-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 31.91489%; }
+    margin-right: 2.1276595745%;
+    width: 31.914893617%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-6733 .sub-section1:last-child, .twothirds-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
+/* line 55, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .two-column-6733 .sub-section1.boxed, .twothirds-onethird .sub-section1.boxed {
   display: table; }
 
 @media screen and (max-width: 24.9375em) {
+  /* line 62, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section0 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 62, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section0 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
-    width: 46.66667%; }
+    margin-right: 6.6666666667%;
+    width: 46.6666666667%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 62, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section0 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 22.58065%; }
+    margin-right: 3.2258064516%;
+    width: 22.5806451613%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 62, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section0 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 23.40426%; }
+    margin-right: 2.1276595745%;
+    width: 23.4042553191%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 62, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section0 {
     margin-right: 0; } }
+
+/* line 67, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .onequarter-threequarters .sub-section0.boxed {
   display: table; }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 71, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section1 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 71, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section1 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
-    width: 46.66667%; }
+    margin-right: 6.6666666667%;
+    width: 46.6666666667%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 71, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section1 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 74.19355%; }
+    margin-right: 3.2258064516%;
+    width: 74.1935483871%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 71, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section1 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 74.46809%; }
+    margin-right: 2.1276595745%;
+    width: 74.4680851064%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .onequarter-threequarters .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 71, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .onequarter-threequarters .sub-section1 {
     margin-right: 0; } }
+
+/* line 76, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .onequarter-threequarters .sub-section1.boxed {
   display: table; }
 
 /*  Two Columns 75-25  */
 @media screen and (max-width: 24.9375em) {
+  /* line 85, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section0, .threequarters-onequarter .sub-section0 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section0:last-child, .threequarters-onequarter .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 85, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section0, .threequarters-onequarter .sub-section0 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
-    width: 46.66667%; }
+    margin-right: 6.6666666667%;
+    width: 46.6666666667%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section0:last-child, .threequarters-onequarter .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 85, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section0, .threequarters-onequarter .sub-section0 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 74.19355%; }
+    margin-right: 3.2258064516%;
+    width: 74.1935483871%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section0:last-child, .threequarters-onequarter .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 85, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section0, .threequarters-onequarter .sub-section0 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 74.46809%; }
+    margin-right: 2.1276595745%;
+    width: 74.4680851064%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section0:last-child, .threequarters-onequarter .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 85, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section0, .threequarters-onequarter .sub-section0 {
     margin-right: 0; } }
+
+/* line 91, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .two-column-7525 .sub-section0.boxed, .threequarters-onequarter .sub-section0.boxed {
   display: table; }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 95, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section1, .threequarters-onequarter .sub-section1 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section1:last-child, .threequarters-onequarter .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 95, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section1, .threequarters-onequarter .sub-section1 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
-    width: 46.66667%; }
+    margin-right: 6.6666666667%;
+    width: 46.6666666667%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section1:last-child, .threequarters-onequarter .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 95, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section1, .threequarters-onequarter .sub-section1 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 22.58065%; }
+    margin-right: 3.2258064516%;
+    width: 22.5806451613%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section1:last-child, .threequarters-onequarter .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 95, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
   .two-column-7525 .sub-section1, .threequarters-onequarter .sub-section1 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 23.40426%; }
+    margin-right: 2.1276595745%;
+    width: 23.4042553191%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .two-column-7525 .sub-section1:last-child, .threequarters-onequarter .sub-section1:last-child {
       margin-right: 0; } }
+
+/* line 98, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_two-column.scss */
 .two-column-7525 .sub-section1.boxed, .threequarters-onequarter .sub-section1.boxed {
   display: table; }
 
 /*  Three Columns 33-33-33  */
 @media screen and (max-width: 24.9375em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section0, .onethird-onethird-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section0:last-child, .onethird-onethird-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section0, .onethird-onethird-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section0:last-child, .onethird-onethird-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section0, .onethird-onethird-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 31.09677%; }
+    margin-right: 3.2258064516%;
+    width: 31.0967741935%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section0:last-child, .onethird-onethird-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 3, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section0, .onethird-onethird-onethird .sub-section0 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 31.91489%; }
+    margin-right: 2.1276595745%;
+    width: 31.914893617%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section0:last-child, .onethird-onethird-onethird .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 6, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section1, .onethird-onethird-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section1:last-child, .onethird-onethird-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 6, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section1, .onethird-onethird-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section1:last-child, .onethird-onethird-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 6, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section1, .onethird-onethird-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 31.09677%; }
+    margin-right: 3.2258064516%;
+    width: 31.0967741935%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section1:last-child, .onethird-onethird-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 6, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section1, .onethird-onethird-onethird .sub-section1 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 31.91489%; }
+    margin-right: 2.1276595745%;
+    width: 31.914893617%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section1:last-child, .onethird-onethird-onethird .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section2, .onethird-onethird-onethird .sub-section2 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section2:last-child, .onethird-onethird-onethird .sub-section2:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section2, .onethird-onethird-onethird .sub-section2 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section2:last-child, .onethird-onethird-onethird .sub-section2:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section2, .onethird-onethird-onethird .sub-section2 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 31.09677%; }
+    margin-right: 3.2258064516%;
+    width: 31.0967741935%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section2:last-child, .onethird-onethird-onethird .sub-section2:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-33-33-33 .sub-section2, .onethird-onethird-onethird .sub-section2 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 31.91489%; }
+    margin-right: 2.1276595745%;
+    width: 31.914893617%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-33-33-33 .sub-section2:last-child, .onethird-onethird-onethird .sub-section2:last-child {
       margin-right: 0; } }
 
 /*  Three Columns 25-50-25  */
 @media screen and (max-width: 24.9375em) {
+  /* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section0, .twentyfive-fifty-twentyfive .sub-section0 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section0:last-child, .twentyfive-fifty-twentyfive .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section0, .twentyfive-fifty-twentyfive .sub-section0 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
-    width: 46.66667%; }
+    margin-right: 6.6666666667%;
+    width: 46.6666666667%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section0:last-child, .twentyfive-fifty-twentyfive .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section0, .twentyfive-fifty-twentyfive .sub-section0 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 22.58065%; }
+    margin-right: 3.2258064516%;
+    width: 22.5806451613%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section0:last-child, .twentyfive-fifty-twentyfive .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section0, .twentyfive-fifty-twentyfive .sub-section0 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 23.40426%; }
+    margin-right: 2.1276595745%;
+    width: 23.4042553191%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section0:last-child, .twentyfive-fifty-twentyfive .sub-section0:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 19, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section1, .twentyfive-fifty-twentyfive .sub-section1 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section1:last-child, .twentyfive-fifty-twentyfive .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 19, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section1, .twentyfive-fifty-twentyfive .sub-section1 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
+    margin-right: 6.6666666667%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section1:last-child, .twentyfive-fifty-twentyfive .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 19, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section1, .twentyfive-fifty-twentyfive .sub-section1 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 48.3871%; }
+    margin-right: 3.2258064516%;
+    width: 48.3870967742%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section1:last-child, .twentyfive-fifty-twentyfive .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 19, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section1, .twentyfive-fifty-twentyfive .sub-section1 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 48.93617%; }
+    margin-right: 2.1276595745%;
+    width: 48.9361702128%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section1:last-child, .twentyfive-fifty-twentyfive .sub-section1:last-child {
       margin-right: 0; } }
+
 @media screen and (max-width: 24.9375em) {
+  /* line 22, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section2, .twentyfive-fifty-twentyfive .sub-section2 {
     float: left;
     display: block;
-    margin-right: 14.28571%;
+    margin-right: 14.2857142857%;
     width: 100%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section2:last-child, .twentyfive-fifty-twentyfive .sub-section2:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 25em) and (max-width: 43.75em) {
+  /* line 22, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section2, .twentyfive-fifty-twentyfive .sub-section2 {
     float: left;
     display: block;
-    margin-right: 6.66667%;
-    width: 46.66667%; }
+    margin-right: 6.6666666667%;
+    width: 46.6666666667%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section2:last-child, .twentyfive-fifty-twentyfive .sub-section2:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 43.8125em) and (max-width: 68.6875em) {
+  /* line 22, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section2, .twentyfive-fifty-twentyfive .sub-section2 {
     float: left;
     display: block;
-    margin-right: 3.22581%;
-    width: 22.58065%; }
+    margin-right: 3.2258064516%;
+    width: 22.5806451613%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section2:last-child, .twentyfive-fifty-twentyfive .sub-section2:last-child {
       margin-right: 0; } }
+
 @media screen and (min-width: 68.75em) {
+  /* line 22, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/layout/_three-column.scss */
   .three-column-25-50-25 .sub-section2, .twentyfive-fifty-twentyfive .sub-section2 {
     float: left;
     display: block;
-    margin-right: 2.12766%;
-    width: 23.40426%; }
+    margin-right: 2.1276595745%;
+    width: 23.4042553191%; }
+    /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/vendor/neat/grid/_span-columns.scss */
     .three-column-25-50-25 .sub-section2:last-child, .twentyfive-fifty-twentyfive .sub-section2:last-child {
       margin-right: 0; } }
 
 /*--------------------------------------------------------------
 10.1 Posts and pages
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
 .sticky {
   display: block; }
 
+/* line 5, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
 .hentry {
   margin: 0 0 1.5em; }
 
+/* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
 .byline,
 .updated:not(.published) {
   display: none; }
 
+/* line 14, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
 .single .byline,
 .group-blog .byline {
   display: inline; }
 
+/* line 19, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
 .page-content,
 .entry-content,
 .entry-summary {
-  margin: 1.5em 0 0; }
+  margin: 1.5em 0 0;
+  position: relative; }
 
+/* line 26, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
 .page-links {
   clear: both;
   margin: 0 0 1.5em; }
 
+/* line 31, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
 article {
   margin: 0px auto; }
+  /* line 34, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
   article header {
     font-weight: 700;
     text-align: center;
-    padding: 2em 0;
-    background: brown;
-    color: white; }
+    padding: 4em 0;
+    color: #271c1c;
+    background: white;
+    border-top: 10px solid #e4e4e4;
+    border-bottom: 3px solid #e4e4e4; }
+    /* line 43, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+    article header.has-background {
+      color: white;
+      background: none;
+      border: none; }
+      /* line 48, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+      article header.has-background h1.entry-title {
+        text-shadow: 1px 1px 25px #000; }
+    /* line 52, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+    article header h1.entry-title {
+      font-size: 4em;
+      font-weight: 300; }
+  /* line 57, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
   article p {
     font-size: 1.3em;
     line-height: 1.4em; }
+  /* line 61, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
   article img {
     width: 100%;
     height: auto; }
 
+/* line 67, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+.landing-page-hero {
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  text-align: center; }
+  /* line 73, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+  .landing-page-hero:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    background: black;
+    opacity: .4;
+    z-index: 1; }
+  /* line 84, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+  .landing-page-hero .wrap {
+    z-index: 10;
+    position: relative; }
+  /* line 89, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+  .landing-page-hero .entry-content {
+    padding: 3em;
+    color: white;
+    text-shadow: 1px 1px 5px #000;
+    position: relative; }
+    /* line 95, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+    .landing-page-hero .entry-content a {
+      color: white; }
+    /* line 99, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+    .landing-page-hero .entry-content:before {
+      content: "";
+      border-top: 3px solid white;
+      width: 100px;
+      position: absolute;
+      margin-left: -50px;
+      left: 50%;
+      top: 10px; }
+  /* line 109, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+  .page-id-8 .landing-page-hero {
+    background-position: center 35%; }
+
+/* line 114, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+section.row {
+  padding: 3.5em 0; }
+
+/* line 118, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_posts-and-pages.scss */
+.page-template-default #content .entry-content.wrap {
+  max-width: 730px;
+  margin: 0 auto;
+  padding: 3.5em 0; }
+
 /*--------------------------------------------------------------
 10.2 Asides
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_asides.scss */
 .blog .format-aside .entry-title,
 .archive .format-aside .entry-title {
   display: none; }
@@ -2065,9 +2255,11 @@ article {
 /*--------------------------------------------------------------
 10.3 Comments
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_comments.scss */
 .comment-content a {
   word-wrap: break-word; }
 
+/* line 4, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/site/primary/_comments.scss */
 .bypostauthor {
   display: block; }
 
@@ -2075,18 +2267,21 @@ article {
 11.0 Infinite scroll
 --------------------------------------------------------------*/
 /* Globally hidden elements when Infinite Scroll is supported and in use. */
+/* line 2, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_infinite-scroll.scss */
 .infinite-scroll .paging-navigation,
 .infinite-scroll.neverending .site-footer {
   /* Theme Footer (when set to scrolling) */
   display: none; }
 
 /* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
+/* line 8, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/modules/_infinite-scroll.scss */
 .infinity-end.neverending .site-footer {
   display: block; }
 
 /*--------------------------------------------------------------
 12.0 Media
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_media.scss */
 .page-content img.wp-smiley,
 .entry-content img.wp-smiley,
 .comment-content img.wp-smiley {
@@ -2096,6 +2291,7 @@ article {
   padding: 0; }
 
 /* Make sure embeds and iframes fit their containers */
+/* line 11, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_media.scss */
 embed,
 iframe,
 object {
@@ -2104,55 +2300,69 @@ object {
 /*--------------------------------------------------------------
 12.1 Captions
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_captions.scss */
 .wp-caption {
   margin-bottom: 1.5em;
   max-width: 100%; }
+  /* line 5, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_captions.scss */
   .wp-caption img[class*="wp-image-"] {
     display: block;
     margin: 0 auto; }
+  /* line 9, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_captions.scss */
   .wp-caption .wp-caption-text {
     margin: 0.8075em 0; }
 
+/* line 14, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_captions.scss */
 .wp-caption-text {
   text-align: center; }
 
 /*--------------------------------------------------------------
 12.2 Galleries
 --------------------------------------------------------------*/
+/* line 1, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery {
   margin-bottom: 1.5em; }
 
+/* line 5, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-item {
   display: inline-block;
   text-align: center;
   vertical-align: top;
   width: 100%; }
 
+/* line 12, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-2 .gallery-item {
   max-width: 50%; }
 
+/* line 16, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-3 .gallery-item {
   max-width: 33.33%; }
 
+/* line 20, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-4 .gallery-item {
   max-width: 25%; }
 
+/* line 24, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-5 .gallery-item {
   max-width: 20%; }
 
+/* line 28, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-6 .gallery-item {
   max-width: 16.66%; }
 
+/* line 32, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-7 .gallery-item {
   max-width: 14.28%; }
 
+/* line 36, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-8 .gallery-item {
   max-width: 12.5%; }
 
+/* line 40, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-columns-9 .gallery-item {
   max-width: 11.11%; }
 
+/* line 44, /Users/paulstonier/livewell.paulstonier.com/wp-content/themes/livewell/sass/media/_galleries.scss */
 .gallery-caption {
   display: block; }
-
 /*# sourceMappingURL=style.css.map */

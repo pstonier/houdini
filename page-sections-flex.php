@@ -18,7 +18,7 @@ get_header(); ?>
                 echo "') ";}
             ?>">
           <div class="wrap">
-            <header class="entry-header <?php if ( get_field('sub-headline') ) { echo "has-sub-headline"; } ?>">
+            <header class="entry-header <?php if ( get_field('sub-headline') ) { echo "has-sub-headline"; } if ( has_post_thumbnail() ) { echo 'has-background'; } ?>">
               <?php if ( get_field('sub-headline') ) { ?><h2 class="sub-headline"><?php the_field('sub-headline'); ?></h2><?php } ?>
               <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
             </header>
@@ -52,13 +52,12 @@ get_header(); ?>
 
               <section <?php if( get_sub_field( 'section_id') ) { ?> id="
                 <?php the_sub_field('section_id'); ?>"
-                  <?php } ?> class="row
-                    <?php   
+                  <?php } ?> class="row<?php   
 
 
                       //adds the class for the selection type
                       $value = get_sub_field('columns');
-                      echo "cols-" . $value;
+                      echo " cols-" . $value;
 
                       //adds class for background-attachment:fixed
                       if( get_sub_field('fixed') ) { echo " fixed"; }

@@ -4,7 +4,7 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package houdini
+ * @package livewell
  */
 
 get_header(); ?>
@@ -24,46 +24,46 @@ get_header(); ?>
 							single_tag_title();
 
 						elseif ( is_author() ) :
-							printf( __( 'Author: %s', 'houdini' ), '<span class="vcard">' . get_the_author() . '</span>' );
+							printf( __( 'Author: %s', 'livewell' ), '<span class="vcard">' . get_the_author() . '</span>' );
 
 						elseif ( is_day() ) :
-							printf( __( 'Day: %s', 'houdini' ), '<span>' . get_the_date() . '</span>' );
+							printf( __( 'Day: %s', 'livewell' ), '<span>' . get_the_date() . '</span>' );
 
 						elseif ( is_month() ) :
-							printf( __( 'Month: %s', 'houdini' ), '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'houdini' ) ) . '</span>' );
+							printf( __( 'Month: %s', 'livewell' ), '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'livewell' ) ) . '</span>' );
 
 						elseif ( is_year() ) :
-							printf( __( 'Year: %s', 'houdini' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'houdini' ) ) . '</span>' );
+							printf( __( 'Year: %s', 'livewell' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'livewell' ) ) . '</span>' );
 
 						elseif ( is_tax( 'post_format', 'post-format-aside' ) ) :
-							_e( 'Asides', 'houdini' );
+							_e( 'Asides', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) :
-							_e( 'Galleries', 'houdini' );
+							_e( 'Galleries', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-image' ) ) :
-							_e( 'Images', 'houdini' );
+							_e( 'Images', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-video' ) ) :
-							_e( 'Videos', 'houdini' );
+							_e( 'Videos', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-quote' ) ) :
-							_e( 'Quotes', 'houdini' );
+							_e( 'Quotes', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-link' ) ) :
-							_e( 'Links', 'houdini' );
+							_e( 'Links', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-status' ) ) :
-							_e( 'Statuses', 'houdini' );
+							_e( 'Statuses', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-audio' ) ) :
-							_e( 'Audios', 'houdini' );
+							_e( 'Audios', 'livewell' );
 
 						elseif ( is_tax( 'post_format', 'post-format-chat' ) ) :
-							_e( 'Chats', 'houdini' );
+							_e( 'Chats', 'livewell' );
 
 						else :
-							_e( 'Archives', 'houdini' );
+							_e( 'Archives', 'livewell' );
 
 						endif;
 					?>
@@ -90,7 +90,7 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 
-			<?php houdini_paging_nav(); ?>
+			<?php livewell_paging_nav(); ?>
 
 		<?php else : ?>
 
